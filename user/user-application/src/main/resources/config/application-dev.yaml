@@ -1,0 +1,22 @@
+server:
+  port: 9000
+spring:
+  config:
+    # 注意：nacos的配置需要放在下面，否则会被本地配置覆盖无法更新
+    import:
+      - classpath:config/dev/datasource.yaml
+      - classpath:config/dev/mybatis.yaml
+      - classpath:config/dev/self.yaml
+      - nacos:user-dev.yaml
+      - nacos:user-base.yaml
+  cloud:
+    nacos:
+      config:
+        namespace: dd881871-af88-4318-994a-1b5f6aefa362
+      discovery:
+        namespace: dd881871-af88-4318-994a-1b5f6aefa362
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
