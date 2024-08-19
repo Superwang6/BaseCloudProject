@@ -16,7 +16,6 @@
     <module>user-api</module>
     <module>user-application</module>
     <module>user-infrastructure</module>
-    <module>user-domain</module>
   </modules>
 
   <properties>

@@ -1,9 +1,10 @@
-package ${package.ServiceImpl};
+package ${customPackage.serviceImpl};
 
-import ${package.Entity}.${entity};
-import ${package.Mapper}.${table.mapperName};
+import ${customPackage.service}.${entity}Service;
+import ${customPackage.bo}.${entity};
+import ${customPackage.poDao}.${entity}PoMapper;
 <#if generateService>
-import ${package.Service}.${table.serviceName};
+import ${customPackage.service}.${entity}Service;
 </#if>
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
@@ -17,12 +18,7 @@ import org.springframework.stereotype.Service;
  * @since ${date}
  */
 @Service
-<#if kotlin>
-open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>()<#if generateService>, ${table.serviceName}</#if> {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${entity}Service {
 
 }
-<#else>
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}><#if generateService> implements ${table.serviceName}</#if> {
 
-}
-</#if>

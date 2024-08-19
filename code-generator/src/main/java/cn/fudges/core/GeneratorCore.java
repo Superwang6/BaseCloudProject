@@ -1,10 +1,11 @@
 package cn.fudges.core;
 
+import cn.fudges.core.enums.CustomOutputFile;
+import cn.fudges.engine.EnhanceFreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 生成MYSQL 仓储层代码
@@ -36,38 +37,139 @@ public class GeneratorCore {
         this.tableNameList = tableNameList;
     }
 
-    private List<CustomFile> createCustomFileList() {
-        // controller
-        CustomFile customFile = new CustomFile.Builder()
-                .fileName("Controller.java")
-                .templatePath("templates/controller.java.ftl")
-                .filePath(this.moduleName + "src/main/java/" + groupId + "")
+    private List<CustomFile> createCustomFileList(Map<String, String> customPackageInfo) {
+        // bo
+        CustomFile customBoFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.bo.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.bo.name()))
+                .templatePath("templates/bo.java.ftl")
                 .build();
 
-        return null;
+        // dao bo
+        CustomFile customDaoBoFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.boDao.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.boDao.name()))
+                .templatePath("templates/bo_dao.java.ftl")
+                .build();
+
+        // dao
+        CustomFile customDaoFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.dao.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.dao.name()))
+                .templatePath("templates/dao.java.ftl")
+                .build();
+
+        // mapper bo
+        CustomFile customMapperBoFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.boMapper.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.boMapper.name()))
+                .templatePath("templates/bo_mapper.xml.ftl")
+                .build();
+
+        // api
+        CustomFile customApiFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.api.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.api.name()))
+                .templatePath("templates/api.java.ftl")
+                .build();
+
+        // api impl
+        CustomFile customApiImplFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.apiImpl.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.apiImpl.name()))
+                .templatePath("templates/apiImpl.java.ftl")
+                .build();
+
+        // api
+        CustomFile customServiceFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.service.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.service.name()))
+                .templatePath("templates/service.java.ftl")
+                .build();
+
+        // api impl
+        CustomFile customServiceImplFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.serviceImpl.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.serviceImpl.name()))
+                .templatePath("templates/serviceImpl.java.ftl")
+                .build();
+
+
+        return Arrays.asList(customBoFile,customMapperBoFile,customDaoBoFile,customDaoFile,customApiFile
+                ,customApiImplFile,customServiceFile,customServiceImplFile
+//                , customControllerFile,
+        );
+    }
+
+    private Map<String,String> createCustomPackageInfo() {
+        Map<String, String> customPackageInfo = new HashMap<>();
+        // po
+        customPackageInfo.put(CustomOutputFile.po.name(), this.groupId + ".entity.po");
+        // bo
+        customPackageInfo.put(CustomOutputFile.bo.name(), this.groupId + ".entity");
+        // dao po
+        customPackageInfo.put(CustomOutputFile.poDao.name(), this.groupId + ".dao.po");
+        // dao bo
+        customPackageInfo.put(CustomOutputFile.boDao.name(), this.groupId + ".dao.bo");
+        // dao
+        customPackageInfo.put(CustomOutputFile.dao.name(), this.groupId + ".dao");
+
+        // mapper po
+        customPackageInfo.put(CustomOutputFile.poMapper.name(), this.groupId + ".mapper.po");
+        // mapper bo
+        customPackageInfo.put(CustomOutputFile.boMapper.name(), this.groupId + ".mapper");
+
+
+        // api
+        customPackageInfo.put(CustomOutputFile.api.name(), this.groupId + ".api");
+        // api impl
+        customPackageInfo.put(CustomOutputFile.apiImpl.name(), this.groupId + ".api.impl");
+
+        // service
+        customPackageInfo.put(CustomOutputFile.service.name(), this.groupId + ".service");
+        //service impl
+        customPackageInfo.put(CustomOutputFile.serviceImpl.name(), this.groupId + ".service.impl");
+
+
+
+        return customPackageInfo;
     }
 
     public void generate(Boolean isOverwritePo, Boolean isOverwriteOther) {
-        String outputDir = moduleName == null || moduleName.equals("") ? "src/main/java" : moduleName + "/src/main/java";
+        Map<String, String> customPackageInfo = createCustomPackageInfo();
+        List<CustomFile> customFileList = createCustomFileList(customPackageInfo);
 
         FastAutoGenerator.create(this.mysqlUrl, this.username, this.password)
-                .globalConfig(builder -> builder.author(this.author).outputDir(outputDir))
-                .packageConfig(builder -> builder.parent(groupId)
-                        .entity("po")
-                        .mapper("dao.po")
-                        .xml("mapper.po")
-                )
+                .globalConfig(builder -> builder.author(this.author))
+                .packageConfig(builder -> builder.parent(groupId))
                 .strategyConfig( builder -> {
                     builder.addInclude(tableNameList)
                             .entityBuilder()
-                            .javaTemplate("")
                             .enableLombok() // 启用 Lombok
                             .enableTableFieldAnnotation() // 启用字段注解
+                            .mapperBuilder()
+                            .enableBaseColumnList()
+                            .enableBaseResultMap()
+                            .formatMapperFileName("%sPoMapper")
+                            .formatXmlFileName("%sPoMapper")
                             .controllerBuilder()
                             .disable()
                             .serviceBuilder()
                             .disable();
+                    if(isOverwritePo) {
+                        //开启覆盖po
+                        builder.entityBuilder().enableFileOverride();
+                        builder.mapperBuilder().enableFileOverride();
+                    }
                 })
+                .injectionConfig(builder -> builder
+                        .beforeOutputFile((tableInfo, objectMap) -> {
+                            objectMap.put("parentPackage", this.moduleName + ".%s-%s.src.main.java");
+                            objectMap.put("customPackage", customPackageInfo);
+                            objectMap.put("isOverwriteOther", isOverwriteOther);
+                        })
+                        .customFile(customFileList))
+                .templateEngine(new EnhanceFreemarkerTemplateEngine())
                 .execute();
     }
 }
