@@ -9,9 +9,9 @@
     </parent>
 
     <artifactId>user-application</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+
     <name>user-application</name>
-    <description>user-domain</description>
+    <description>user-application</description>
     <url/>
     <licenses>
         <license/>
@@ -36,11 +36,12 @@
         </dependency>
         <dependency>
             <groupId>cn.fudges</groupId>
-            <artifactId>user-domain</artifactId>
+            <artifactId>user-infrastructure</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -54,6 +55,15 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>code-generator</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>common</artifactId>
         </dependency>
     </dependencies>
 
@@ -91,6 +101,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <resources>

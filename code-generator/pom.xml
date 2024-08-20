@@ -13,52 +13,49 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
+    <mysql-connector-j.version>8.4.0</mysql-connector-j.version>
+    <mybatis-plus.version>3.5.7</mybatis-plus.version>
+    <freemarker.version>2.3.33</freemarker.version>
+    <velocity-engine.version>2.3</velocity-engine.version>
+    <jebrains-annotations.version>24.1.0</jebrains-annotations.version>
+    <slf4j.version>1.7.22</slf4j.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
-      <version>8.4.0</version>
+      <version>${mysql-connector-j.version}</version>
     </dependency>
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-generator</artifactId>
-      <version>3.5.7</version>
+      <version>${mybatis-plus.version}</version>
     </dependency>
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus</artifactId>
-      <version>3.5.7</version>
+      <version>${mybatis-plus.version}</version>
     </dependency>
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
-      <version>2.3.33</version>
+      <version>${freemarker.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.velocity</groupId>
       <artifactId>velocity-engine-core</artifactId>
-      <version>2.3</version>
+      <version>${velocity-engine.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
-      <version>24.1.0</version>
+      <version>${jebrains-annotations.version}</version>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>com.alibaba.fastjson2</groupId>-->
-<!--      <artifactId>fastjson2</artifactId>-->
-<!--      <version>2.0.52</version>-->
-<!--    </dependency>-->
-
-
-
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.7.22</version>
+      <version>${slf4j.version}</version>
     </dependency>
   </dependencies>
 

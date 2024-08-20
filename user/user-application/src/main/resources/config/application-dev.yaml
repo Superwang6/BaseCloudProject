@@ -15,8 +15,3 @@ spring:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
       discovery:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
-management:
-  endpoint:
-    web:
-      exposure:
-        include: "*"

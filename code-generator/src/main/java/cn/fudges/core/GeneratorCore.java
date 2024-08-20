@@ -2,6 +2,7 @@ package cn.fudges.core;
 
 import cn.fudges.core.enums.CustomOutputFile;
 import cn.fudges.engine.CustomFreemarkerTemplateEngine;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
@@ -201,7 +202,7 @@ public class GeneratorCore {
                                 }
                             }
                             objectMap.put("voImportPackages", voImportPackages);
-                            objectMap.put("parentPackage", this.moduleName + ".%s-%s.src.main.java");
+                            objectMap.put("parentPackage", this.moduleName + StringPool.DOT + this.moduleName + "-%s.src.main.java");
                             objectMap.put("customPackage", customPackageInfo);
                             objectMap.put("isOverwriteOther", isOverwriteOther);
                         })
