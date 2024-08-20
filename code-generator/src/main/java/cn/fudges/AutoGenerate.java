@@ -1,12 +1,8 @@
 package cn.fudges;
 
 import cn.fudges.core.GeneratorCore;
-import cn.fudges.engine.EnhanceFreemarkerTemplateEngine;
-import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**

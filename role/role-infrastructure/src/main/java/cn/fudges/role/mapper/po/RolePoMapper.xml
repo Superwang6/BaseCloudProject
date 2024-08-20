@@ -7,17 +7,31 @@
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="role_desc" property="roleDesc" />
+        <result column="tyint" property="tyint" />
+        <result column="ot" property="ot" />
+        <result column="doub" property="doub" />
+        <result column="time" property="time" />
+        <result column="dat" property="dat" />
+        <result column="timestamp" property="timestamp" />
+        <result column="text" property="text" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, role_desc
+        id, name, role_desc, tyint, ot, doub, time, dat, timestamp, text
     </sql>
 
     <!-- 连表查询结果列 -->
     <sql id="Column_List_With_TableName">
         ${tableName}.id, 
         ${tableName}.name, 
-        ${tableName}.role_desc
+        ${tableName}.role_desc, 
+        ${tableName}.tyint, 
+        ${tableName}.ot, 
+        ${tableName}.doub, 
+        ${tableName}.time, 
+        ${tableName}.dat, 
+        ${tableName}.timestamp, 
+        ${tableName}.text
     </sql>
 </mapper>

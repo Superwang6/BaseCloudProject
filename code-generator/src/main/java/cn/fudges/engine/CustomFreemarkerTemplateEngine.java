@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 2024/8/16
  */
 
-public class EnhanceFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
+public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
     @Override
     protected void outputCustomFile(@NotNull List<CustomFile> customFiles, @NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {

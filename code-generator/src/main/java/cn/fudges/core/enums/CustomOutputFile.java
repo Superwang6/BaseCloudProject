@@ -10,8 +10,8 @@ import java.util.Map;
 public enum CustomOutputFile {
     po("po", "Po.java", "infrastructure"),
     bo("bo", ".java", "infrastructure"),
-    request("", "",""),
-    response("", "",""),
+    request("request", "Request.java","api"),
+    response("response", "Response.java","api"),
     service("service", "Service.java","application"),
     serviceImpl("serviceImpl", "ServiceImpl.java","application"),
     poDao("poDao", "PoMapper.java", "infrastructure"),

@@ -1,9 +1,12 @@
 package cn.fudges.core;
 
 import cn.fudges.core.enums.CustomOutputFile;
-import cn.fudges.engine.EnhanceFreemarkerTemplateEngine;
+import cn.fudges.engine.CustomFreemarkerTemplateEngine;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
+import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import org.apache.ibatis.type.JdbcType;
 
 import java.util.*;
 
@@ -80,14 +83,28 @@ public class GeneratorCore {
                 .templatePath("templates/apiImpl.java.ftl")
                 .build();
 
-        // api
+        // request
+        CustomFile customRequestFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.request.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.request.name()))
+                .templatePath("templates/request.java.ftl")
+                .build();
+
+        // response
+        CustomFile customResponseFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.response.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.response.name()))
+                .templatePath("templates/response.java.ftl")
+                .build();
+
+        // service
         CustomFile customServiceFile = new CustomFile.Builder()
                 .fileName(CustomOutputFile.service.getFileName())
                 .filePath(customPackageInfo.get(CustomOutputFile.service.name()))
                 .templatePath("templates/service.java.ftl")
                 .build();
 
-        // api impl
+        // service impl
         CustomFile customServiceImplFile = new CustomFile.Builder()
                 .fileName(CustomOutputFile.serviceImpl.getFileName())
                 .filePath(customPackageInfo.get(CustomOutputFile.serviceImpl.name()))
@@ -96,9 +113,7 @@ public class GeneratorCore {
 
 
         return Arrays.asList(customBoFile,customMapperBoFile,customDaoBoFile,customDaoFile,customApiFile
-                ,customApiImplFile,customServiceFile,customServiceImplFile
-//                , customControllerFile,
-        );
+                ,customApiImplFile,customServiceFile,customServiceImplFile, customRequestFile, customResponseFile);
     }
 
     private Map<String,String> createCustomPackageInfo() {
@@ -125,12 +140,15 @@ public class GeneratorCore {
         // api impl
         customPackageInfo.put(CustomOutputFile.apiImpl.name(), this.groupId + ".api.impl");
 
+        // request
+        customPackageInfo.put(CustomOutputFile.request.name(), this.groupId + ".request");
+        // response
+        customPackageInfo.put(CustomOutputFile.response.name(), this.groupId + ".response");
+
         // service
         customPackageInfo.put(CustomOutputFile.service.name(), this.groupId + ".service");
-        //service impl
+        // service impl
         customPackageInfo.put(CustomOutputFile.serviceImpl.name(), this.groupId + ".service.impl");
-
-
 
         return customPackageInfo;
     }
@@ -141,12 +159,22 @@ public class GeneratorCore {
 
         FastAutoGenerator.create(this.mysqlUrl, this.username, this.password)
                 .globalConfig(builder -> builder.author(this.author))
+                .dataSourceConfig(builder ->
+                    builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {
+                        // 兼容旧版本转换成Integer
+                        if (JdbcType.TINYINT == metaInfo.getJdbcType()) {
+                            return DbColumnType.INTEGER;
+                        }
+                        return typeRegistry.getColumnType(metaInfo);
+                    })
+                )
                 .packageConfig(builder -> builder.parent(groupId))
                 .strategyConfig( builder -> {
                     builder.addInclude(tableNameList)
                             .entityBuilder()
                             .enableLombok() // 启用 Lombok
                             .enableTableFieldAnnotation() // 启用字段注解
+
                             .mapperBuilder()
                             .enableBaseColumnList()
                             .enableBaseResultMap()
@@ -164,12 +192,21 @@ public class GeneratorCore {
                 })
                 .injectionConfig(builder -> builder
                         .beforeOutputFile((tableInfo, objectMap) -> {
+                            TableInfo table = (TableInfo) objectMap.get("table");
+                            Set<String> packages = table.getImportPackages();
+                            List<String> voImportPackages = new ArrayList<>();
+                            for (String importPackage : packages) {
+                                if(!importPackage.contains("baomidou")) {
+                                    voImportPackages.add(importPackage);
+                                }
+                            }
+                            objectMap.put("voImportPackages", voImportPackages);
                             objectMap.put("parentPackage", this.moduleName + ".%s-%s.src.main.java");
                             objectMap.put("customPackage", customPackageInfo);
                             objectMap.put("isOverwriteOther", isOverwriteOther);
                         })
                         .customFile(customFileList))
-                .templateEngine(new EnhanceFreemarkerTemplateEngine())
+                .templateEngine(new CustomFreemarkerTemplateEngine())
                 .execute();
     }
 }

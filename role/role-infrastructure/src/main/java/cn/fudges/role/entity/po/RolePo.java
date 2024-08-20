@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +15,7 @@ import lombok.Setter;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-08-19
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -30,4 +32,31 @@ public class RolePo implements Serializable {
 
     @TableField("role_desc")
     private String roleDesc;
+
+    /**
+     * 注释111
+     */
+    @TableField("tyint")
+    private Boolean tyint;
+
+    /**
+     * 注释2222
+     */
+    @TableField("ot")
+    private Integer ot;
+
+    @TableField("doub")
+    private Long doub;
+
+    @TableField("time")
+    private LocalDateTime time;
+
+    @TableField("dat")
+    private LocalDate dat;
+
+    @TableField("timestamp")
+    private LocalDateTime timestamp;
+
+    @TableField("text")
+    private String text;
 }
