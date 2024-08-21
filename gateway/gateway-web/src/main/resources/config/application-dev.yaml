@@ -8,6 +8,11 @@ spring:
   cloud:
     nacos:
       config:
+        import-check:
+          enabled: false
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
       discovery:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
+logging:
+  level:
+    cn.fudges: debug

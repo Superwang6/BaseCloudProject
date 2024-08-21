@@ -1,4 +1,4 @@
-package cn.fuges.gatewayweb.controller.user;
+package cn.fudges.gatewayweb.controller.user;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

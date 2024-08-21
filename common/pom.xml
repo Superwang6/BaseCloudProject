@@ -5,16 +5,44 @@
     <groupId>cn.fudges</groupId>
     <artifactId>common</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+
+    <packaging>pom</packaging>
 
     <name>common</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>base-api</module>
+        <module>base-common</module>
+    </modules>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hutool.version>5.8.26</hutool.version>
+        <spring-cloud.version>2023.0.2</spring-cloud.version>
+        <common.version>1.0-SNAPSHOT</common.version>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>base-common</artifactId>
+                <version>${common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>base-api</artifactId>
+                <version>${common.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>

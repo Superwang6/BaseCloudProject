@@ -2,7 +2,6 @@ package cn.fudges.user.api.impl;
 
 import cn.fudges.common.result.ResultResponse;
 import cn.fudges.user.api.UserBaseApi;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserBaseApiImpl implements UserBaseApi {
 
-    @GetMapping("/user/id")
     @Override
-    public ResultResponse<String> getUserById() {
-        return ResultResponse.success("12312312");
+    public ResultResponse<String> getUserById(String id) {
+//        AssertUtils.isTrue(false, ResultCodeEnum.PARAM_ERROR);
+        return ResultResponse.success("success: " + id);
     }
 }
 

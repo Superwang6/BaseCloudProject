@@ -31,15 +31,6 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>cn.fudges</groupId>
-            <artifactId>user-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.fudges</groupId>
-            <artifactId>user-infrastructure</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -56,14 +47,21 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
+
+        <!-- Mine Package -->
         <dependency>
             <groupId>cn.fudges</groupId>
             <artifactId>code-generator</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>cn.fudges</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>user-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>user-infrastructure</artifactId>
         </dependency>
     </dependencies>
 

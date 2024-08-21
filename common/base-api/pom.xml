@@ -3,38 +3,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.fudges</groupId>
-        <artifactId>user</artifactId>
+        <artifactId>common</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>user-api</artifactId>
+    <artifactId>base-api</artifactId>
     <packaging>jar</packaging>
 
-    <name>user-api</name>
+    <name>base-api</name>
     <url>http://maven.apache.org</url>
 
     <properties>
-        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>cn.fudges</groupId>
-            <artifactId>base-api</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.fudges</groupId>
-            <artifactId>base-common</artifactId>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
         </dependency>
     </dependencies>
 </project>

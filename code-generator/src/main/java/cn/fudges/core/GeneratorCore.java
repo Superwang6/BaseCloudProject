@@ -201,6 +201,7 @@ public class GeneratorCore {
                                     voImportPackages.add(importPackage);
                                 }
                             }
+                            objectMap.put("moduleName", this.moduleName);
                             objectMap.put("voImportPackages", voImportPackages);
                             objectMap.put("parentPackage", this.moduleName + StringPool.DOT + this.moduleName + "-%s.src.main.java");
                             objectMap.put("customPackage", customPackageInfo);
