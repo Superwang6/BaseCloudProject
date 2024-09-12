@@ -21,6 +21,7 @@ public enum CustomOutputFile {
     boMapper("boMapper", "BoMapper.xml", "infrastructure"),
     api("api", "Api.java", "api"),
     apiImpl("apiImpl", "ApiImpl.java","application"),
+    controller("controller", "Controller.java","application"),
     parent("", "","");
 
     private String name;

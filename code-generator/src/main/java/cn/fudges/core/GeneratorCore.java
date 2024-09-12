@@ -84,6 +84,13 @@ public class GeneratorCore {
                 .templatePath("templates/apiImpl.java.ftl")
                 .build();
 
+        // controller
+        CustomFile customControllerFile = new CustomFile.Builder()
+                .fileName(CustomOutputFile.controller.getFileName())
+                .filePath(customPackageInfo.get(CustomOutputFile.controller.name()))
+                .templatePath("templates/controller.java.ftl")
+                .build();
+
         // request
         CustomFile customRequestFile = new CustomFile.Builder()
                 .fileName(CustomOutputFile.request.getFileName())
@@ -114,7 +121,7 @@ public class GeneratorCore {
 
 
         return Arrays.asList(customBoFile,customMapperBoFile,customDaoBoFile,customDaoFile,customApiFile
-                ,customApiImplFile,customServiceFile,customServiceImplFile, customRequestFile, customResponseFile);
+                ,customApiImplFile, customControllerFile,customServiceFile,customServiceImplFile, customRequestFile, customResponseFile);
     }
 
     private Map<String,String> createCustomPackageInfo() {
@@ -139,7 +146,9 @@ public class GeneratorCore {
         // api
         customPackageInfo.put(CustomOutputFile.api.name(), this.groupId + ".api");
         // api impl
-        customPackageInfo.put(CustomOutputFile.apiImpl.name(), this.groupId + ".api.impl");
+        customPackageInfo.put(CustomOutputFile.apiImpl.name(), this.groupId + ".controller.apiImpl");
+        // controller
+        customPackageInfo.put(CustomOutputFile.controller.name(), this.groupId + ".controller");
 
         // request
         customPackageInfo.put(CustomOutputFile.request.name(), this.groupId + ".request");
@@ -206,9 +215,22 @@ public class GeneratorCore {
                             objectMap.put("parentPackage", this.moduleName + StringPool.DOT + this.moduleName + "-%s.src.main.java");
                             objectMap.put("customPackage", customPackageInfo);
                             objectMap.put("isOverwriteOther", isOverwriteOther);
+                            objectMap.put("entityKC", camelToKebab((String) objectMap.get("entity")));
                         })
                         .customFile(customFileList))
                 .templateEngine(new CustomFreemarkerTemplateEngine())
                 .execute();
+    }
+
+    /**
+     * 驼峰 转 kebab-case
+     * @param input
+     * @return
+     */
+    public String camelToKebab(String input) {
+        // 使用正则表达式在大写字母前加上 "-"
+        return input
+                .replaceAll("([a-z])([A-Z]+)", "$1-$2") // 在小写字母和大写字母之间添加 "-"
+                .toLowerCase(); // 转为小写
     }
 }
