@@ -14,6 +14,7 @@
         <module>user</module>
         <module>role</module>
         <module>gateway</module>
+        <module>auth</module>
     </modules>
 
     <properties>
@@ -95,12 +96,6 @@
 
             <!--     Mine Package       -->
             <!-- code generator -->
-            <dependency>
-                <groupId>cn.fudges</groupId>
-                <artifactId>code-generator</artifactId>
-                <version>${code-generator.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>cn.fudges</groupId>
                 <artifactId>common</artifactId>
