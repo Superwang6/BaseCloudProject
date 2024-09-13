@@ -1,6 +1,6 @@
-package cn.fudges.role.api.impl;
+package cn.fudges.role.controller.impl;
 
-import cn.fudges.role.api.RoleApi;
+import cn.fudges.role.controller.RoleApi;
 
 /**
  *

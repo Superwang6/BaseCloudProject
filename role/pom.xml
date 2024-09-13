@@ -20,8 +20,26 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <role.version>1.0-SNAPSHOT</role.version>
     </properties>
 
-    <dependencies>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>role-api</artifactId>
+                <version>${role.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>role-application</artifactId>
+                <version>${role.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>role-infrastructure</artifactId>
+                <version>${role.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

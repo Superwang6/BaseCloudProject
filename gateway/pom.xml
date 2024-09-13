@@ -25,12 +25,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- api -->
-            <dependency>
-                <groupId>cn.fudges</groupId>
-                <artifactId>user-api</artifactId>
-                <version>${user-api.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

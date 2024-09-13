@@ -10,8 +10,8 @@ import java.util.Map;
 public enum CustomOutputFile {
     po("po", "Po.java", "infrastructure"),
     bo("bo", ".java", "infrastructure"),
-    request("request", "Request.java","api"),
-    response("response", "Response.java","api"),
+    request("request", "Request.java","controller"),
+    response("response", "Response.java","controller"),
     service("service", "Service.java","application"),
     serviceImpl("serviceImpl", "ServiceImpl.java","application"),
     poDao("poDao", "PoMapper.java", "infrastructure"),
@@ -19,7 +19,7 @@ public enum CustomOutputFile {
     dao("dao", "Dao.java", "infrastructure"),
     poMapper("poMapper", "PoMapper.xml", "infrastructure"),
     boMapper("boMapper", "BoMapper.xml", "infrastructure"),
-    api("api", "Api.java", "api"),
+    api("controller", "Api.java", "controller"),
     apiImpl("apiImpl", "ApiImpl.java","application"),
     controller("controller", "Controller.java","application"),
     parent("", "","");

@@ -70,14 +70,14 @@ public class GeneratorCore {
                 .templatePath("templates/bo_mapper.xml.ftl")
                 .build();
 
-        // api
+        // controller
         CustomFile customApiFile = new CustomFile.Builder()
                 .fileName(CustomOutputFile.api.getFileName())
                 .filePath(customPackageInfo.get(CustomOutputFile.api.name()))
                 .templatePath("templates/api.java.ftl")
                 .build();
 
-        // api impl
+        // controller impl
         CustomFile customApiImplFile = new CustomFile.Builder()
                 .fileName(CustomOutputFile.apiImpl.getFileName())
                 .filePath(customPackageInfo.get(CustomOutputFile.apiImpl.name()))
@@ -143,9 +143,9 @@ public class GeneratorCore {
         customPackageInfo.put(CustomOutputFile.boMapper.name(), this.groupId + ".mapper");
 
 
-        // api
-        customPackageInfo.put(CustomOutputFile.api.name(), this.groupId + ".api");
-        // api impl
+        // controller
+        customPackageInfo.put(CustomOutputFile.api.name(), this.groupId + ".controller");
+        // controller impl
         customPackageInfo.put(CustomOutputFile.apiImpl.name(), this.groupId + ".controller.apiImpl");
         // controller
         customPackageInfo.put(CustomOutputFile.controller.name(), this.groupId + ".controller");
