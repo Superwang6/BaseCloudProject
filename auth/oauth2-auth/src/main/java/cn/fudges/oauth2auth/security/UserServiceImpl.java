@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @author 王平远
  * @since 2024/9/13
  */
-@Service
+//@Service
 public class UserServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
