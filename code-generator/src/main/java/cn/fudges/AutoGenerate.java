@@ -1,6 +1,7 @@
 package cn.fudges;
 
 import cn.fudges.core.GeneratorCore;
+import cn.fudges.core.enums.SubModule;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,9 +19,10 @@ public class AutoGenerate {
     public static void main(String[] args) {
 
         GeneratorCore generatorCore = new GeneratorCore();
-        generatorCore.initBase("wangpeiyuan", "code-generator", "cn.fudges.init");
-        generatorCore.initMysql(mysqlUrl, username, password, tableNameList);
-        generatorCore.generate(true, true);
+        generatorCore.initBase("wangpeiyuan", "code-generator", "cn.fudges.init")
+                .initMysql(mysqlUrl, username, password, tableNameList)
+                .rangeExcludeSubModule(SubModule.api)
+                .generate(true, true);
 
     }
 }

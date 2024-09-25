@@ -1,6 +1,7 @@
 package cn.fudges.core;
 
 import cn.fudges.core.enums.CustomOutputFile;
+import cn.fudges.core.enums.SubModule;
 import cn.fudges.engine.CustomFreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
@@ -10,6 +11,8 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import org.apache.ibatis.type.JdbcType;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * 生成MYSQL 仓储层代码
@@ -27,139 +30,76 @@ public class GeneratorCore {
     private String username = "nacos";
     private String password = "nacos";
     private List<String> tableNameList = Collections.singletonList("users");
+    private List<CustomOutputFile> outputFileList = new ArrayList<>();
 
-    public void initBase(String author, String moduleName, String groupId) {
+    public GeneratorCore initBase(String author, String moduleName, String groupId) {
         this.author = author;
         this.moduleName = moduleName;
         this.groupId = groupId;
+        return rangeIncludeFile(CustomOutputFile.values());
     }
 
-    public void initMysql(String mysqlUrl, String username, String password, List<String> tableNameList) {
+    public GeneratorCore initMysql(String mysqlUrl, String username, String password, List<String> tableNameList) {
         this.mysqlUrl = mysqlUrl;
         this.username = username;
         this.password = password;
         this.tableNameList = tableNameList;
+        return this;
+    }
+
+    /**
+     * 生成范围，默认全部，可以通过填入覆盖部分
+     * @return
+     */
+    private GeneratorCore rangeIncludeFile(CustomOutputFile... files){
+        outputFileList.addAll(Arrays.asList(files));
+        return this;
+    }
+
+    /**
+     * 生成范围，默认全部，可以通过填入排除部分
+     * @return
+     */
+    public GeneratorCore rangeExInclude(CustomOutputFile... excludes){
+        for (CustomOutputFile exclude : excludes) {
+            outputFileList.remove(exclude);
+        }
+        return this;
+    }
+
+    /**
+     * 生成范围，默认全部，可以通过填入排除模块
+     * @return
+     */
+    public GeneratorCore rangeExcludeSubModule(SubModule... excludeSubModules) {
+        Map<String, List<CustomOutputFile>> map = outputFileList.stream().collect(Collectors.groupingBy(CustomOutputFile::getSubModule));
+        for (SubModule exclude : excludeSubModules) {
+            map.remove(exclude.name());
+        }
+        outputFileList = map.values().stream().flatMap(List::stream).collect(Collectors.toList());
+        return this;
     }
 
     private List<CustomFile> createCustomFileList(Map<String, String> customPackageInfo) {
-        // bo
-        CustomFile customBoFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.bo.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.bo.name()))
-                .templatePath("templates/bo.java.ftl")
-                .build();
-
-        // dao bo
-        CustomFile customDaoBoFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.boDao.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.boDao.name()))
-                .templatePath("templates/bo_dao.java.ftl")
-                .build();
-
-        // dao
-        CustomFile customDaoFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.dao.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.dao.name()))
-                .templatePath("templates/dao.java.ftl")
-                .build();
-
-        // mapper bo
-        CustomFile customMapperBoFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.boMapper.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.boMapper.name()))
-                .templatePath("templates/bo_mapper.xml.ftl")
-                .build();
-
-        // controller
-        CustomFile customApiFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.api.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.api.name()))
-                .templatePath("templates/api.java.ftl")
-                .build();
-
-        // controller impl
-        CustomFile customApiImplFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.apiImpl.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.apiImpl.name()))
-                .templatePath("templates/apiImpl.java.ftl")
-                .build();
-
-        // controller
-        CustomFile customControllerFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.controller.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.controller.name()))
-                .templatePath("templates/controller.java.ftl")
-                .build();
-
-        // request
-        CustomFile customRequestFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.request.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.request.name()))
-                .templatePath("templates/request.java.ftl")
-                .build();
-
-        // response
-        CustomFile customResponseFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.response.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.response.name()))
-                .templatePath("templates/response.java.ftl")
-                .build();
-
-        // service
-        CustomFile customServiceFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.service.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.service.name()))
-                .templatePath("templates/service.java.ftl")
-                .build();
-
-        // service impl
-        CustomFile customServiceImplFile = new CustomFile.Builder()
-                .fileName(CustomOutputFile.serviceImpl.getFileName())
-                .filePath(customPackageInfo.get(CustomOutputFile.serviceImpl.name()))
-                .templatePath("templates/serviceImpl.java.ftl")
-                .build();
-
-
-        return Arrays.asList(customBoFile,customMapperBoFile,customDaoBoFile,customDaoFile,customApiFile
-                ,customApiImplFile, customControllerFile,customServiceFile,customServiceImplFile, customRequestFile, customResponseFile);
+        List<CustomFile> customFileList = new ArrayList<>();
+        for (CustomOutputFile customOutputFile : outputFileList) {
+            if(customOutputFile.getTemplateUrl() != null) {
+                CustomFile file = new CustomFile.Builder()
+                        .fileName(customOutputFile.getFileName())
+                        .filePath(customPackageInfo.get(customOutputFile.name()))
+                        .templatePath(customOutputFile.getTemplateUrl())
+                        .build();
+                customFileList.add(file);
+            }
+        }
+        return customFileList;
     }
 
     private Map<String,String> createCustomPackageInfo() {
         Map<String, String> customPackageInfo = new HashMap<>();
-        // po
-        customPackageInfo.put(CustomOutputFile.po.name(), this.groupId + ".entity.po");
-        // bo
-        customPackageInfo.put(CustomOutputFile.bo.name(), this.groupId + ".entity");
-        // dao po
-        customPackageInfo.put(CustomOutputFile.poDao.name(), this.groupId + ".dao.po");
-        // dao bo
-        customPackageInfo.put(CustomOutputFile.boDao.name(), this.groupId + ".dao.bo");
-        // dao
-        customPackageInfo.put(CustomOutputFile.dao.name(), this.groupId + ".dao");
-
-        // mapper po
-        customPackageInfo.put(CustomOutputFile.poMapper.name(), this.groupId + ".mapper.po");
-        // mapper bo
-        customPackageInfo.put(CustomOutputFile.boMapper.name(), this.groupId + ".mapper");
-
-
-        // controller
-        customPackageInfo.put(CustomOutputFile.api.name(), this.groupId + ".controller");
-        // controller impl
-        customPackageInfo.put(CustomOutputFile.apiImpl.name(), this.groupId + ".controller.apiImpl");
-        // controller
-        customPackageInfo.put(CustomOutputFile.controller.name(), this.groupId + ".controller");
-
-        // request
-        customPackageInfo.put(CustomOutputFile.request.name(), this.groupId + ".request");
-        // response
-        customPackageInfo.put(CustomOutputFile.response.name(), this.groupId + ".response");
-
-        // service
-        customPackageInfo.put(CustomOutputFile.service.name(), this.groupId + ".service");
-        // service impl
-        customPackageInfo.put(CustomOutputFile.serviceImpl.name(), this.groupId + ".service.impl");
-
+        for (CustomOutputFile customOutputFile : CustomOutputFile.values()) {
+            customPackageInfo.put(customOutputFile.name(), this.groupId + customOutputFile.getSubPackage());
+        }
         return customPackageInfo;
     }
 

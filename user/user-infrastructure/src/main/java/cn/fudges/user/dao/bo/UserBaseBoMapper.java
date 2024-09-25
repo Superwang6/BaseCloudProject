@@ -7,7 +7,7 @@ package cn.fudges.user.dao.bo;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-12
+ * @since 2024-09-19
  */
 public interface UserBaseBoMapper {
 

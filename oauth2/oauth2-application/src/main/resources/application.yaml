@@ -1,0 +1,18 @@
+server:
+  port: 9200
+spring:
+  application:
+    name: oauth2-auth-server
+  profiles:
+    active: @profile.active@
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: BASE_CLOUD_PROJECT
+        import-check:
+          enabled: false
+      discovery:
+        server-addr: 127.0.0.1:8848
+        group: BASE_CLOUD_PROJECT

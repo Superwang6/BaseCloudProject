@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author wangpingyuan
- * @since 2024-09-12
+ * @since 2024-09-19
  */
 @RestController
 public class UserBaseApiImpl implements UserBaseApi {
