@@ -1,13 +1,13 @@
 package cn.fudges.user.entity;
 
-import cn.fudges.user.entity.po.UserBasePo;
+import cn.fudges.user.entity.po.UserPasswordPo;
 import lombok.Data;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户基础信息
+ * 用户密码信息
  * </p>
  *
  * @author wangpingyuan
@@ -16,6 +16,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-public class UserBase extends UserBasePo {
+public class UserPassword extends UserPasswordPo {
 
 }

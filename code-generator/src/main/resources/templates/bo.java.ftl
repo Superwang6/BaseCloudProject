@@ -8,8 +8,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 </#if>
 <#if entityLombokModel>
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
     <#if chainModel>
 import lombok.experimental.Accessors;
     </#if>
@@ -24,8 +25,9 @@ import lombok.experimental.Accessors;
  * @since ${date}
  */
 <#if entityLombokModel>
-@Getter
-@Setter
+@Data
+@Builder
+@EqualsAndHashCode(callSuper = true)
     <#if chainModel>
 @Accessors(chain = true)
     </#if>
@@ -33,6 +35,6 @@ import lombok.experimental.Accessors;
 <#if swagger>
 @ApiModel(value = "${entity}对象", description = "${table.comment!}")
 </#if>
-public class ${entity} extends ${entity}Po{
+public class ${entity} extends ${entity}Po {
 
 }

@@ -1,6 +1,6 @@
 package cn.fudges.oauth2.dao.po;
 
-import cn.fudges.oauth2.entity.AuthOauth;
+import cn.fudges.oauth2.entity.AuthOauthClient;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-25
+ * @since 2024-09-27
  */
-public interface AuthOauthPoMapper extends BaseMapper<AuthOauth> {
+public interface AuthOauthClientPoMapper extends BaseMapper<AuthOauthClient> {
 
 }

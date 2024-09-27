@@ -1,6 +1,5 @@
 package cn.fudges.oauth2.entity.po;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,25 +13,19 @@ import lombok.Setter;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-25
+ * @since 2024-09-27
  */
 @Getter
 @Setter
-@TableName("auth_oauth")
-public class AuthOauthPo implements Serializable {
+@TableName("auth_oauth_client")
+public class AuthOauthClientPo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-
-    /**
      * 客户端id
      */
-    @TableField("client_id")
+    @TableId("client_id")
     private String clientId;
 
     /**
@@ -46,4 +39,22 @@ public class AuthOauthPo implements Serializable {
      */
     @TableField("allow_grant_type")
     private String allowGrantType;
+
+    /**
+     * 允许跳转的url，逗号分割
+     */
+    @TableField("allow_redirect_uri")
+    private String allowRedirectUri;
+
+    /**
+     * 签约的权限，逗号分割
+     */
+    @TableField("contract_scopes")
+    private String contractScopes;
+
+    /**
+     * 状态，0-正常，1-禁用，2-删除
+     */
+    @TableField("status")
+    private Integer status;
 }

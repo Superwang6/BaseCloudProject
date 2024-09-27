@@ -10,7 +10,7 @@
     <artifactId>oauth2</artifactId>
     <packaging>pom</packaging>
 
-    <name>auth</name>
+    <name>oauth2</name>
     <url>http://maven.apache.org</url>
     <modules>
         <module>oauth2-application</module>

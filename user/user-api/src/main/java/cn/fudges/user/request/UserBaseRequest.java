@@ -2,8 +2,8 @@ package cn.fudges.user.request;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+import cn.fudges.baseapi.request.RequestEntity;
+import lombok.*;
 
 /**
  * <p>
@@ -11,11 +11,14 @@ import lombok.Setter;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-19
+ * @since 2024-09-27
  */
-@Getter
-@Setter
-public class UserBaseRequest implements Serializable {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class UserBaseRequest extends RequestEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -74,4 +77,9 @@ public class UserBaseRequest implements Serializable {
      * 所属租户
      */
     private Long tenantId;
+
+    /**
+     * 密码
+     */
+    private String password;
 }

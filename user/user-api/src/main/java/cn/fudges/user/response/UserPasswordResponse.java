@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户基础信息
+ * 用户密码信息
  * </p>
  *
  * @author wangpingyuan
@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-public class UserBaseResponse extends ResponseEntity implements Serializable {
+public class UserPasswordResponse extends ResponseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,39 +29,24 @@ public class UserBaseResponse extends ResponseEntity implements Serializable {
     private Long id;
 
     /**
-     * 名称
+     * 用户id
      */
-    private String userName;
+    private Long userId;
 
     /**
-     * 手机号
+     * 登录密码
      */
-    private String mobilePhone;
+    private String loginPassword;
 
     /**
-     * 昵称
+     * 登录随机盐
      */
-    private String nickName;
+    private String loginSalt;
 
     /**
-     * 实名状态，0-否，1-是
+     * 密码长度
      */
-    private Integer authStatus;
-
-    /**
-     * 身份证号码
-     */
-    private String idNum;
-
-    /**
-     * 真实姓名
-     */
-    private String realName;
-
-    /**
-     * 状态，0-正常，1-注销，2-禁用
-     */
-    private Integer status;
+    private Integer passwordLength;
 
     /**
      * 创建时间
@@ -69,12 +54,7 @@ public class UserBaseResponse extends ResponseEntity implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 修改时间
+     * 更新时间
      */
     private LocalDateTime modifyTime;
-
-    /**
-     * 所属租户
-     */
-    private Long tenantId;
 }

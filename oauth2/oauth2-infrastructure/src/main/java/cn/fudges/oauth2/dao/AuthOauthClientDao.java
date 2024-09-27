@@ -1,7 +1,7 @@
 package cn.fudges.oauth2.dao;
 
-import cn.fudges.oauth2.entity.AuthOauth;
-import cn.fudges.oauth2.dao.po.AuthOauthPoMapper;
+import cn.fudges.oauth2.entity.AuthOauthClient;
+import cn.fudges.oauth2.dao.po.AuthOauthClientPoMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-25
+ * @since 2024-09-27
  */
 @Service
-public class AuthOauthDao extends ServiceImpl<AuthOauthPoMapper, AuthOauth> {
+public class AuthOauthClientDao extends ServiceImpl<AuthOauthClientPoMapper, AuthOauthClient> {
 
 }

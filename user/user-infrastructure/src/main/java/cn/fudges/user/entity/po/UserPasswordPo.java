@@ -11,7 +11,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 用户基础信息
+ * 用户密码信息
  * </p>
  *
  * @author wangpingyuan
@@ -19,8 +19,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("user_base")
-public class UserBasePo implements Serializable {
+@TableName("user_password")
+public class UserPasswordPo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,46 +31,28 @@ public class UserBasePo implements Serializable {
     private Long id;
 
     /**
-     * 名称
+     * 用户id
      */
-    @TableField("user_name")
-    private String userName;
+    @TableField("user_id")
+    private Long userId;
 
     /**
-     * 手机号
+     * 登录密码
      */
-    @TableField("mobile_phone")
-    private String mobilePhone;
+    @TableField("login_password")
+    private String loginPassword;
 
     /**
-     * 昵称
+     * 登录随机盐
      */
-    @TableField("nick_name")
-    private String nickName;
+    @TableField("login_salt")
+    private String loginSalt;
 
     /**
-     * 实名状态，0-否，1-是
+     * 密码长度
      */
-    @TableField("auth_status")
-    private Integer authStatus;
-
-    /**
-     * 身份证号码
-     */
-    @TableField("id_num")
-    private String idNum;
-
-    /**
-     * 真实姓名
-     */
-    @TableField("real_name")
-    private String realName;
-
-    /**
-     * 状态，0-正常，1-注销，2-禁用
-     */
-    @TableField("status")
-    private Integer status;
+    @TableField("password_length")
+    private Integer passwordLength;
 
     /**
      * 创建时间
@@ -79,14 +61,8 @@ public class UserBasePo implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 修改时间
+     * 更新时间
      */
     @TableField("modify_time")
     private LocalDateTime modifyTime;
-
-    /**
-     * 所属租户
-     */
-    @TableField("tenant_id")
-    private Long tenantId;
 }

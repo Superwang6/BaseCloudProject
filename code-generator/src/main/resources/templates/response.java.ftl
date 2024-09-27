@@ -9,9 +9,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 </#if>
+import cn.fudges.baseapi.response.ResponseEntity;
 <#if entityLombokModel>
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
     <#if chainModel>
 import lombok.experimental.Accessors;
     </#if>
@@ -26,8 +26,11 @@ import lombok.experimental.Accessors;
  * @since ${date}
  */
 <#if entityLombokModel>
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
     <#if chainModel>
 @Accessors(chain = true)
     </#if>
@@ -37,7 +40,7 @@ import lombok.experimental.Accessors;
 <#elseif swagger>
 @ApiModel(value = "${entity}Response对象", description = "${table.comment!}")
 </#if>
-public class ${entity}Response implements Serializable {
+public class ${entity}Response extends ResponseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

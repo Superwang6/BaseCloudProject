@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  *
  * @author wangpingyuan
- * @since 2024-09-25
+ * @since 2024-09-27
  */
 @RestController
-@RequestMapping("/oauth2/auth-oauth")
-public class AuthOauthController {
+@RequestMapping("/oauth2/auth-open-user")
+public class AuthOpenUserController {
 
 }
 

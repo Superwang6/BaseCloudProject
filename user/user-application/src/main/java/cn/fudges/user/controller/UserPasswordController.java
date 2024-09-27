@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2024-09-27
  */
 @RestController
-@RequestMapping("/user/user-base")
-public class UserBaseController {
+@RequestMapping("/user/user-password")
+public class UserPasswordController {
 
 }
 

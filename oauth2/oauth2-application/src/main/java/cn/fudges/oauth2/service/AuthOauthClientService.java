@@ -1,6 +1,6 @@
 package cn.fudges.oauth2.service;
 
-import cn.fudges.oauth2.entity.AuthOauth;
+import cn.fudges.oauth2.entity.AuthOauthClient;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-25
+ * @since 2024-09-27
  */
-public interface AuthOauthService extends IService<AuthOauth> {
+public interface AuthOauthClientService extends IService<AuthOauthClient> {
 
 }

@@ -2,7 +2,7 @@ server:
   port: 9200
 spring:
   application:
-    name: oauth2-auth-server
+    name: oauth2-auth-service
   profiles:
     active: @profile.active@
   cloud:

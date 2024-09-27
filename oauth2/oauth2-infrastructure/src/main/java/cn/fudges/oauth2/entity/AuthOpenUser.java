@@ -1,19 +1,19 @@
 package cn.fudges.oauth2.entity;
 
-import cn.fudges.oauth2.entity.po.AuthOauthPo;
+import cn.fudges.oauth2.entity.po.AuthOpenUserPo;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * <p>
- * oauth2.0 的客户端表
+ * 
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-25
+ * @since 2024-09-27
  */
 @Getter
 @Setter
-public class AuthOauth extends AuthOauthPo{
+public class AuthOpenUser extends AuthOpenUserPo{
 
 }

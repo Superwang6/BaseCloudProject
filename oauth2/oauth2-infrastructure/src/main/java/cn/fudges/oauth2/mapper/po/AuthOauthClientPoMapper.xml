@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fudges.oauth2.dao.po.AuthOauthClientPoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.fudges.oauth2.entity.po.AuthOauthClientPo">
+        <id column="client_id" property="clientId" />
+        <result column="client_secret" property="clientSecret" />
+        <result column="allow_grant_type" property="allowGrantType" />
+        <result column="allow_redirect_uri" property="allowRedirectUri" />
+        <result column="contract_scopes" property="contractScopes" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        client_id, client_secret, allow_grant_type, allow_redirect_uri, contract_scopes, status
+    </sql>
+
+    <!-- 连表查询结果列 -->
+    <sql id="Column_List_With_TableName">
+        ${tableName}.client_id, 
+        ${tableName}.client_secret, 
+        ${tableName}.allow_grant_type, 
+        ${tableName}.allow_redirect_uri, 
+        ${tableName}.contract_scopes, 
+        ${tableName}.status
+    </sql>
+</mapper>

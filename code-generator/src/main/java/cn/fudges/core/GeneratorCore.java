@@ -124,7 +124,6 @@ public class GeneratorCore {
                             .entityBuilder()
                             .enableLombok() // 启用 Lombok
                             .enableTableFieldAnnotation() // 启用字段注解
-
                             .mapperBuilder()
                             .enableBaseColumnList()
                             .enableBaseResultMap()

@@ -1,10 +1,8 @@
 package cn.fudges.oauth2.controller;
 
 import cn.dev33.satoken.context.SaHolder;
-import cn.dev33.satoken.oauth2.config.SaOAuth2ServerConfig;
 import cn.dev33.satoken.oauth2.processor.SaOAuth2ServerProcessor;
-import cn.fudges.oauth2.service.AuthOauthService;
-import cn.fudges.user.api.UserBaseApi;
+import cn.fudges.oauth2.service.AuthOauthClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SaOAuth2ServerController {
 
     @Autowired
-    UserBaseApi userBaseApi;
-
-    @Autowired
-    AuthOauthService authOauthService;
+    AuthOauthClientService authOauthService;
 
 
     // OAuth2-Server 端：处理所有 OAuth2 相关请求
