@@ -46,24 +46,28 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!--		&lt;!&ndash; Sa-Token 权限认证, 在线文档：https://sa-token.cc &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>cn.dev33</groupId>-->
+<!--			<artifactId>sa-token-spring-boot3-starter</artifactId>-->
+<!--		</dependency>-->
+<!--		&lt;!&ndash; Sa-Token OAuth2.0 模块 &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>cn.dev33</groupId>-->
+<!--			<artifactId>sa-token-oauth2</artifactId>-->
+<!--		</dependency>-->
+<!--		&lt;!&ndash; Sa-Token 整合 Redis (可选) &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>cn.dev33</groupId>-->
+<!--			<artifactId>sa-token-redis-jackson</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.commons</groupId>-->
+<!--			<artifactId>commons-pool2</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>cn.dev33</groupId>
-			<artifactId>sa-token-spring-boot3-starter</artifactId>
-		</dependency>
-		<!-- Sa-Token OAuth2.0 模块 -->
-		<dependency>
-			<groupId>cn.dev33</groupId>
-			<artifactId>sa-token-oauth2</artifactId>
-		</dependency>
-		<!-- Sa-Token 整合 Redis (可选) -->
-		<dependency>
-			<groupId>cn.dev33</groupId>
-			<artifactId>sa-token-redis-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-pool2</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
 		</dependency>
 
 		<dependency>

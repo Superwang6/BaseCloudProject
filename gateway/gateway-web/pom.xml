@@ -42,19 +42,22 @@
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>cn.dev33</groupId>-->
+<!--            <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>cn.dev33</groupId>-->
+<!--            <artifactId>sa-token-redis-jackson</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.commons</groupId>-->
+<!--            <artifactId>commons-pool2</artifactId>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-redis-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-
 
 
     </dependencies>
