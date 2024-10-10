@@ -8,11 +8,11 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: local.fudges.cn:8848
         file-extension: yaml
         group: BASE_CLOUD_PROJECT
         import-check:
           enabled: false
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: local.fudges.cn:8848
         group: BASE_CLOUD_PROJECT

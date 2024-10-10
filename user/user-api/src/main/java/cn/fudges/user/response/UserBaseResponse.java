@@ -77,4 +77,6 @@ public class UserBaseResponse extends ResponseEntity implements Serializable {
      * 所属租户
      */
     private Long tenantId;
+
+    private UserPasswordResponse userPassword;
 }

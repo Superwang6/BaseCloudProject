@@ -26,6 +26,7 @@
         <com.baomidou.mybatis-plus.version>3.5.7</com.baomidou.mybatis-plus.version>
         <mysql-connector.version>8.4.0</mysql-connector.version>
         <hutool.version>5.8.26</hutool.version>
+        <cglib.version>3.3.0</cglib.version>
         <springdoc.version>2.6.0</springdoc.version>
         <feign-okhttp.version>13.3</feign-okhttp.version>
         <redis-common-pool.version>2.12.0</redis-common-pool.version>
@@ -82,6 +83,13 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
             <!-- springdoc -->
             <dependency>
                 <groupId>org.springdoc</groupId>

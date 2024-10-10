@@ -1,6 +1,7 @@
 package cn.fudges.user.dao.po;
 
 import cn.fudges.user.entity.UserPassword;
+import cn.fudges.user.entity.po.UserPasswordPo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +10,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
-public interface UserPasswordPoMapper extends BaseMapper<UserPassword> {
+public interface UserPasswordPoMapper extends BaseMapper<UserPasswordPo> {
 
 }

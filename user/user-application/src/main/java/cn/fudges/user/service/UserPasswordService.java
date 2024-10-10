@@ -1,6 +1,6 @@
 package cn.fudges.user.service;
 
-import cn.fudges.user.entity.UserPassword;
+import cn.fudges.user.entity.po.UserPasswordPo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
-public interface UserPasswordService extends IService<UserPassword> {
+public interface UserPasswordService extends IService<UserPasswordPo> {
 
 }

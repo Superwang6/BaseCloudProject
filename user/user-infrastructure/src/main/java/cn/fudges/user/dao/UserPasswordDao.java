@@ -1,7 +1,7 @@
 package cn.fudges.user.dao;
 
-import cn.fudges.user.entity.UserPassword;
 import cn.fudges.user.dao.po.UserPasswordPoMapper;
+import cn.fudges.user.entity.po.UserPasswordPo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
 @Service
-public class UserPasswordDao extends ServiceImpl<UserPasswordPoMapper, UserPassword> {
+public class UserPasswordDao extends ServiceImpl<UserPasswordPoMapper, UserPasswordPo> {
 
 }

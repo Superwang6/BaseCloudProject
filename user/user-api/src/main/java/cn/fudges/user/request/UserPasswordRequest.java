@@ -3,9 +3,7 @@ package cn.fudges.user.request;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import cn.fudges.baseapi.request.RequestEntity;
-import lombok.Data;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * <p>
@@ -13,10 +11,12 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UserPasswordRequest extends RequestEntity implements Serializable {
 

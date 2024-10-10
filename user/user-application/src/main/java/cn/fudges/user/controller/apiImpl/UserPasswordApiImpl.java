@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
 @RestController
 public class UserPasswordApiImpl implements UserPasswordApi {

@@ -1,5 +1,6 @@
 package cn.fudges.user.service.impl;
 
+import cn.fudges.user.entity.po.UserPasswordPo;
 import cn.fudges.user.service.UserPasswordService;
 import cn.fudges.user.entity.UserPassword;
 import cn.fudges.user.dao.po.UserPasswordPoMapper;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
 @Service
-public class UserPasswordServiceImpl extends ServiceImpl<UserPasswordPoMapper, UserPassword> implements UserPasswordService {
+public class UserPasswordServiceImpl extends ServiceImpl<UserPasswordPoMapper, UserPasswordPo> implements UserPasswordService {
 
 }
 

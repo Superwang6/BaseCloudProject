@@ -18,4 +18,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class UserBase extends UserBasePo {
 
+    private UserPassword userPassword;
 }

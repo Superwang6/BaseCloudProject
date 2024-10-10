@@ -1,6 +1,6 @@
 package ${customPackage.service};
 
-import ${customPackage.bo}.${entity};
+import ${customPackage.po}.${entity}Po;
 import ${superServiceClassPackage};
 
 /**
@@ -11,6 +11,6 @@ import ${superServiceClassPackage};
  * @author ${author}
  * @since ${date}
  */
-public interface ${entity}Service extends ${superServiceClass}<${entity}> {
+public interface ${entity}Service extends ${superServiceClass}<${entity}Po> {
 
 }

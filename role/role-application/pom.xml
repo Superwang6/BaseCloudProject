@@ -102,6 +102,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!-- 添加 add-opens jvm参数,因为cglib 未兼容jdk17模块化，这里只是兼容，如果cglib升级兼容jdk17过后，可以去掉 -->
+                    <jvmArguments>
+                        --add-opens=java.base/java.lang=ALL-UNNAMED
+                    </jvmArguments>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

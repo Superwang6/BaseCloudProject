@@ -2,6 +2,7 @@ package cn.fudges.user.dao;
 
 import cn.fudges.user.entity.UserBase;
 import cn.fudges.user.dao.po.UserBasePoMapper;
+import cn.fudges.user.entity.po.UserBasePo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-09-27
  */
 @Service
-public class UserBaseDao extends ServiceImpl<UserBasePoMapper, UserBase> {
+public class UserBaseDao extends ServiceImpl<UserBasePoMapper, UserBasePo> {
 
 }

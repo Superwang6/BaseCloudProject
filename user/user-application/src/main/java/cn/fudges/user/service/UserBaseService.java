@@ -1,6 +1,7 @@
 package cn.fudges.user.service;
 
 import cn.fudges.user.entity.UserBase;
+import cn.fudges.user.entity.po.UserBasePo;
 import cn.fudges.user.request.UserBaseRequest;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,7 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author wangpingyuan
  * @since 2024-09-27
  */
-public interface UserBaseService extends IService<UserBase> {
+public interface UserBaseService extends IService<UserBasePo> {
 
     Boolean checkLoginUserNameAndPassword(UserBaseRequest request);
+
+    UserBase queryUserByUsername(String username);
 }

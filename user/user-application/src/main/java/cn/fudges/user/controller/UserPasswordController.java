@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  *
  * @author wangpingyuan
- * @since 2024-09-27
+ * @since 2024-10-09
  */
 @RestController
 @RequestMapping("/user/user-password")
