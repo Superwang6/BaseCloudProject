@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 import cn.fudges.baseapi.response.ResponseEntity;
 <#if entityLombokModel>
 import lombok.*;
+import lombok.experimental.SuperBuilder;
     <#if chainModel>
 import lombok.experimental.Accessors;
     </#if>
@@ -27,10 +28,10 @@ import lombok.experimental.Accessors;
  */
 <#if entityLombokModel>
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
     <#if chainModel>
 @Accessors(chain = true)
     </#if>

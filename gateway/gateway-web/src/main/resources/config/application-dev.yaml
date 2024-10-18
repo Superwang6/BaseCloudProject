@@ -1,9 +1,4 @@
 spring:
-  config:
-    # 注意：nacos的配置需要放在下面，否则会被本地配置覆盖无法更新
-    import:
-      - classpath:config/dev/self.yaml
-      - nacos:gateway-route-dev.yaml
   cloud:
     nacos:
       config:
@@ -12,6 +7,25 @@ spring:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
       discovery:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          messaging-client:
+#            provider: spring
+#            client-id: messaging-client
+#            client-secret: 123456
+#            client-name: 7dd8aed4-7858-47fe-a018-276d0dae1547
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://127.0.0.1:9000/test
+#            scope:
+#              - openid
+#              - profile
+#              - message.read
+#              - message.write
+#        provider:
+#          spring:
+#            issuer-uri: http://127.0.0.1:9200
 logging:
   level:
     cn.fudges: debug

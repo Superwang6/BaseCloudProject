@@ -20,7 +20,7 @@ import ${mapperAnnotationClass.name};
 <#if kotlin>
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
-public interface ${entity}PoMapper extends ${superMapperClass}<${entity}> {
+public interface ${entity}PoMapper extends ${superMapperClass}<${entity}Po> {
 
 }
 </#if>

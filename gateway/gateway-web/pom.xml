@@ -47,6 +47,15 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -93,7 +102,17 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
         </plugins>
+
         <resources>
             <!--排除配置文件-->
             <resource>
@@ -115,7 +134,7 @@
                     <include>application.yaml</include>
                     <!--根据maven选择环境导入配置文件-->
                     <include>config/application-${profile.active}.yaml</include>
-                    <include>config/${profile.active}/*.yaml</include>
+                    <include>config/routes/*.yaml</include>
                 </includes>
             </resource>
         </resources>

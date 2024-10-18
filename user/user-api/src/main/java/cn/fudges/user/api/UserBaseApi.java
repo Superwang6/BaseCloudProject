@@ -21,6 +21,6 @@ public interface UserBaseApi {
     ResultResponse<Boolean> checkLoginUserNameAndPassword(@RequestBody UserBaseRequest request);
 
     @GetMapping("/user/userBase/queryUserByUsername/{username}")
-    ResultResponse<UserBaseResponse> queryUserByUsername(@PathVariable String username);
+    ResultResponse<UserBaseResponse> queryUserByUsername(@PathVariable ("username") String username);
 }
 

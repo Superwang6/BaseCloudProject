@@ -5,6 +5,10 @@ spring:
     name: gateway-web
   profiles:
     active: @profile.active@
+  config:
+    import:
+      - classpath:config/routes/user-route.yaml
+      - nacos:gateway-routes-dev.yaml
   cloud:
     nacos:
       config:

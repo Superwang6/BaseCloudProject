@@ -6,8 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <p>
@@ -17,8 +18,9 @@ import lombok.Setter;
  * @author wangpingyuan
  * @since 2024-10-09
  */
-@Getter
-@Setter
+@Data
+@SuperBuilder
+@NoArgsConstructor
 @TableName("user_password")
 public class UserPasswordPo implements Serializable {
 

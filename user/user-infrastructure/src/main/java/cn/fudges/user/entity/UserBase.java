@@ -1,9 +1,8 @@
 package cn.fudges.user.entity;
 
 import cn.fudges.user.entity.po.UserBasePo;
-import lombok.Data;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <p>
@@ -14,8 +13,10 @@ import lombok.EqualsAndHashCode;
  * @since 2024-09-27
  */
 @Data
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class UserBase extends UserBasePo {
 
     private UserPassword userPassword;
