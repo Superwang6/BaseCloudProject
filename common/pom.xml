@@ -22,6 +22,7 @@
         <spring-cloud.version>2023.0.2</spring-cloud.version>
         <common.version>1.0-SNAPSHOT</common.version>
         <code-generator.version>1.0-SNAPSHOT</code-generator.version>
+        <lombok.version>1.18.34</lombok.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -46,6 +47,11 @@
                 <groupId>cn.fudges</groupId>
                 <artifactId>code-generator</artifactId>
                 <version>${code-generator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

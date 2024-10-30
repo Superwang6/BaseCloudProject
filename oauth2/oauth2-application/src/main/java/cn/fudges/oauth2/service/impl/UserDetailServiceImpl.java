@@ -5,7 +5,7 @@ import cn.fudges.common.utils.AssertUtils;
 import cn.fudges.oauth2.mode.UserDetail;
 import cn.fudges.user.api.UserBaseApi;
 import cn.fudges.user.response.UserBaseResponse;
-import cn.hutool.extra.cglib.CglibUtil;
+import cn.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,8 +26,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         ResultResponse<UserBaseResponse> userResponse = userBaseApi.queryUserByUsername(username);
         AssertUtils.isSuccess(userResponse);
+        UserDetail userDetail = BeanUtil.copyProperties(userResponse, UserDetail.class);
 
-        UserDetail detail = CglibUtil.copy(userResponse, UserDetail.class);
-        return detail;
+        return userDetail;
     }
 }

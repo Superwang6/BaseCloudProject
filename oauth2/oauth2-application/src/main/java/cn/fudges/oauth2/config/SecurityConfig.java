@@ -24,7 +24,7 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
  * @author 王平远
  * @since 2024/9/29
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 public class SecurityConfig {
 

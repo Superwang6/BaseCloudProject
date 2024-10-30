@@ -7,11 +7,13 @@ spring:
     active: @profile.active@
   config:
     import:
-      - classpath:config/routes/user-route.yaml
+      - classpath:routes/user-route.yaml
       - nacos:gateway-routes-dev.yaml
   cloud:
     nacos:
       config:
+        import-check:
+          enabled: false
         server-addr: 127.0.0.1:8848
         file-extension: yaml
         group: BASE_CLOUD_PROJECT

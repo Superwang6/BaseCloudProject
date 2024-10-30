@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import cn.fudges.baseapi.request.RequestEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <p>
@@ -14,7 +15,7 @@ import lombok.*;
  * @since 2024-09-27
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

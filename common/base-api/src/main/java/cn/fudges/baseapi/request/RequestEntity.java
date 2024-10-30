@@ -1,11 +1,20 @@
 package cn.fudges.baseapi.request;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
 import java.time.LocalDateTime;
 
 /**
  * @author 王平远
  * @since 2024/9/27
  */
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@ToString
 public class RequestEntity {
 
     private Integer pageNum;
@@ -15,36 +24,4 @@ public class RequestEntity {
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
-
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
 }

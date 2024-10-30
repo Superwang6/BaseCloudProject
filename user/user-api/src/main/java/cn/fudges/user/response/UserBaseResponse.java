@@ -3,9 +3,8 @@ package cn.fudges.user.response;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import cn.fudges.baseapi.response.ResponseEntity;
-import lombok.Data;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <p>
@@ -16,8 +15,10 @@ import lombok.EqualsAndHashCode;
  * @since 2024-09-27
  */
 @Data
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class UserBaseResponse extends ResponseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

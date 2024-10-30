@@ -30,6 +30,7 @@
         <feign-okhttp.version>13.3</feign-okhttp.version>
         <redis-common-pool.version>2.12.0</redis-common-pool.version>
         <servlet-api.version>6.1.0</servlet-api.version>
+        <lombok.version>1.18.34</lombok.version>
 
         <code-generator.version>1.0-SNAPSHOT</code-generator.version>
         <common.version>1.0-SNAPSHOT</common.version>
@@ -103,10 +104,21 @@
                 <version>${servlet-api.version}</version>
             </dependency>
 
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
 
 
             <!--     Mine Package       -->
             <!-- code generator -->
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>code-generator</artifactId>
+                <version>${code-generator.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.fudges</groupId>
                 <artifactId>common</artifactId>

@@ -8,6 +8,7 @@ import cn.fudges.user.service.UserBaseService;
 import cn.fudges.user.entity.UserBase;
 import cn.fudges.user.dao.po.UserBasePoMapper;
 import cn.fudges.user.service.UserPasswordService;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
@@ -57,13 +58,12 @@ public class UserBaseServiceImpl extends ServiceImpl<UserBasePoMapper, UserBaseP
         QueryWrapper<UserBasePo> wrapper = new QueryWrapper<>();
         wrapper.eq("user_name", username);
         UserBasePo one = this.getOne(wrapper);
-        //TODO Cglib 无法深度拷贝，需要考虑额外的方法,后续再研究
-        UserBase base = CglibUtil.copy(one, UserBase.class);
+        UserBase base = BeanUtil.copyProperties(one, UserBase.class);
 
         if(ObjectUtil.isNotNull(base)) {
             QueryWrapper<UserPasswordPo> passwordQueryWrapper = new QueryWrapper<>();
             passwordQueryWrapper.eq("user_id", base.getId());
-            UserPassword password = CglibUtil.copy(userPasswordService.getOne(passwordQueryWrapper), UserPassword.class);
+            UserPassword password = BeanUtil.copyProperties(userPasswordService.getOne(passwordQueryWrapper), UserPassword.class);
             base.setUserPassword(password);
         }
         return base;
