@@ -1,6 +1,8 @@
 package cn.fudges.oauth2.mode;
 
 import cn.fudges.user.response.UserPasswordResponse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
  * @author 王平远
  * @since 2024/10/9
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @Data
 public class UserDetail implements UserDetails, Serializable {
 
@@ -79,16 +83,17 @@ public class UserDetail implements UserDetails, Serializable {
      */
     private List<Long> authorityIdList;
 
-    private UserPasswordResponse userPasswordResponse;
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList(this.authorityIdList.stream().map(String::valueOf).collect(Collectors.toList()));
+//        return AuthorityUtils.createAuthorityList(this.authorityIdList.stream().map(String::valueOf).collect(Collectors.toList()));
+        return AuthorityUtils.createAuthorityList("query");
     }
 
     @Override
     public String getPassword() {
-        return this.userPasswordResponse.getLoginPassword();
+        return this.password;
     }
 
     @Override

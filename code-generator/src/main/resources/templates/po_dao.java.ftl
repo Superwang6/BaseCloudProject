@@ -1,6 +1,6 @@
 package ${customPackage.poDao};
 
-import ${customPackage.bo}.${entity};
+import ${customPackage.po}.${entity}Po;
 import ${superMapperClassPackage};
 <#if mapperAnnotationClass??>
 import ${mapperAnnotationClass.name};

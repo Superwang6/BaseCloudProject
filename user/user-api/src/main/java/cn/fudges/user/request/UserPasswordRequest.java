@@ -40,11 +40,6 @@ public class UserPasswordRequest extends RequestEntity implements Serializable {
     private String loginPassword;
 
     /**
-     * 登录随机盐
-     */
-    private String loginSalt;
-
-    /**
      * 密码长度
      */
     private Integer passwordLength;

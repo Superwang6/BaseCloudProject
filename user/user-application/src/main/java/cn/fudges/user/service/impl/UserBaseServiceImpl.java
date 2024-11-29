@@ -47,7 +47,7 @@ public class UserBaseServiceImpl extends ServiceImpl<UserBasePoMapper, UserBaseP
             passwordQueryWrapper.eq("user_id", userBase.getId());
             UserPassword password = CglibUtil.copy(userPasswordService.getOne(passwordQueryWrapper), UserPassword.class);
 
-            String md5Password = SecureUtil.md5(password.getLoginSalt() + request.getPassword());
+            String md5Password = SecureUtil.md5(request.getPassword());
             return password.getLoginPassword().equals(md5Password);
         }
         return false;

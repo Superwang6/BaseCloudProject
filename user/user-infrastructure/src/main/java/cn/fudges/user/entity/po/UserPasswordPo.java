@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -16,7 +15,7 @@ import lombok.experimental.SuperBuilder;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-10-09
+ * @since 2024-11-29
  */
 @Data
 @SuperBuilder
@@ -43,12 +42,6 @@ public class UserPasswordPo implements Serializable {
      */
     @TableField("login_password")
     private String loginPassword;
-
-    /**
-     * 登录随机盐
-     */
-    @TableField("login_salt")
-    private String loginSalt;
 
     /**
      * 密码长度
