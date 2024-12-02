@@ -1,6 +1,7 @@
 package cn.fudges.oauth2.mode;
 
 import cn.fudges.user.response.UserPasswordResponse;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
@@ -85,6 +86,7 @@ public class UserDetail implements UserDetails, Serializable {
 
     private String password;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return AuthorityUtils.createAuthorityList(this.authorityIdList.stream().map(String::valueOf).collect(Collectors.toList()));

@@ -12,5 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user/user-base")
 public class UserBaseController {
 
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
+    }
+
 }
 

@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
@@ -71,12 +72,12 @@ public class AuthorizationConfig {
     }
 
     @Bean
-    public RegisteredClientRepository registeredClientRepository() {
+    public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder) {
         RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 // 客户端id
                 .clientId("messaging-client")
                 // 客户端秘钥，使用密码解析器加密
-                .clientSecret("{noop}123456")
+                .clientSecret(passwordEncoder.encode("123456"))
                 // 客户端认证方式，基于请求头的认证
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 // 配置资源服务器使用该客户端获取授权时支持的方式
@@ -140,34 +141,35 @@ public class AuthorizationConfig {
         return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
     }
 
-    @Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
-    }
 
-    /**
-     * 配置基于db的oauth2的授权管理服务
-     *
-     * @param jdbcTemplate               db数据源信息
-     * @param registeredClientRepository 上边注入的客户端repository
-     * @return JdbcOAuth2AuthorizationService
-     */
-    @Bean
-    public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        // 基于db的oauth2认证服务
-        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
-    }
+//    @Bean
+//    public AuthorizationServerSettings authorizationServerSettings() {
+//        return AuthorizationServerSettings.builder().build();
+//    }
 
-    /**
-     * 配置基于db的授权确认管理服务
-     *
-     * @param jdbcTemplate               db数据源信息
-     * @param registeredClientRepository 客户端repository
-     * @return JdbcOAuth2AuthorizationConsentService
-     */
-    @Bean
-    public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        // 基于db的授权确认管理服务
-        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
-    }
+//    /**
+//     * 配置基于db的oauth2的授权管理服务
+//     *
+//     * @param jdbcTemplate               db数据源信息
+//     * @param registeredClientRepository 上边注入的客户端repository
+//     * @return JdbcOAuth2AuthorizationService
+//     */
+//    @Bean
+//    public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+//        // 基于db的oauth2认证服务
+//        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
+//    }
+//
+//    /**
+//     * 配置基于db的授权确认管理服务
+//     *
+//     * @param jdbcTemplate               db数据源信息
+//     * @param registeredClientRepository 客户端repository
+//     * @return JdbcOAuth2AuthorizationConsentService
+//     */
+//    @Bean
+//    public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+//        // 基于db的授权确认管理服务
+//        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
+//    }
 }

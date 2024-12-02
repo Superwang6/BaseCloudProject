@@ -17,7 +17,7 @@ spring:
             client-secret: 123456
             client-name: 7dd8aed4-7858-47fe-a018-276d0dae1547
             authorization-grant-type: authorization_code
-            redirect-uri: http://127.0.0.1:9000/test
+            redirect-uri: "http://127.0.0.1:9200/login/oauth2/code/{registrationId}"
             scope:
               - openid
               - profile
