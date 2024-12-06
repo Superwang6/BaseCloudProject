@@ -16,3 +16,6 @@ spring:
       discovery:
         server-addr: local.fudges.cn:8848
         group: BASE_CLOUD_PROJECT
+jwt:
+  private.key: classpath:static/app.key
+  public.key: classpath:static/app.pub

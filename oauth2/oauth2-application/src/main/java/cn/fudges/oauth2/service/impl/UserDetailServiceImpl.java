@@ -28,6 +28,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         ResultResponse<UserBaseResponse> userResponse = userBaseApi.queryUserByUsername(username);
         AssertUtils.isSuccess(userResponse);
         UserDetail userDetail = BeanUtil.copyProperties(userResponse.getData(), UserDetail.class);
+        userDetail.setName(userResponse.getData().getUserName());
         if(ObjectUtil.isAllNotEmpty(userResponse.getData(), userResponse.getData().getUserPassword())) {
             userDetail.setPassword(userResponse.getData().getUserPassword().getLoginPassword());
         }

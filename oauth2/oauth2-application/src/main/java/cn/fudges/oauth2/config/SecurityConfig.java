@@ -50,7 +50,6 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(withDefaults())
-//                .oauth2Login(withDefaults())
                 .userDetailsService(userDetailService);
         return http.build();
     }

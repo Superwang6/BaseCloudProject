@@ -15,9 +15,10 @@ spring:
             provider: spring
             client-id: messaging-client
             client-secret: 123456
-            client-name: 7dd8aed4-7858-47fe-a018-276d0dae1547
+            client-name: 71fb2b2b-a46d-4bcf-9ba5-8263d4cb0449
+            client-authentication-method: client_secret_basic
+            redirect-uri: http://127.0.0.1:9000/login/oauth2/code/messaging-client
             authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:9200/login/oauth2/code/{registrationId}"
             scope:
               - openid
               - profile
@@ -25,7 +26,9 @@ spring:
               - message.write
         provider:
           spring:
-            issuer-uri: http://127.0.0.1:9200
+            authorization-uri: http://127.0.0.1:9200/oauth2/authorize
+            token-uri: http://127.0.0.1:9200/oauth2/token
+            jwk-set-uri: http://127.0.0.1:9200/oauth2/jwks
 logging:
   level:
     cn.fudges: debug

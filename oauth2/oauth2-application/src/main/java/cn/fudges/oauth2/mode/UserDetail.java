@@ -32,7 +32,7 @@ public class UserDetail implements UserDetails, Serializable {
     /**
      * 名称
      */
-    private String userName;
+    private String name;
 
     /**
      * 手机号
@@ -100,7 +100,7 @@ public class UserDetail implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.name;
     }
 
     @Override
