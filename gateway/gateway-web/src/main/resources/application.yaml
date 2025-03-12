@@ -14,27 +14,27 @@ spring:
       config:
         import-check:
           enabled: false
-        server-addr: 127.0.0.1:8848
+        server-addr: local.fudges.cn:8848
         file-extension: yaml
         group: BASE_CLOUD_PROJECT
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: local.fudges.cn:8848
         group: BASE_CLOUD_PROJECT
     gateway:
       enabled: true
       # 跨域配置
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allow-credentials: true
-            allowed-origins: "*"
-            allowed-headers: "*"
-            allowed-methods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allow-credentials: true
+#            allowed-origins: "*"
+#            allowed-headers: "*"
+#            allowed-methods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#              - OPTIONS
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

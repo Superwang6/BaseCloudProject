@@ -15,7 +15,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
  */
 @Configuration
 @EnableWebFluxSecurity
-//@EnableReactiveMethodSecurity
 public class SecurityConfig {
 
 
@@ -28,26 +27,9 @@ public class SecurityConfig {
                         .anyExchange().authenticated()
                 )
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-//                .httpBasic(withDefaults())
-//                .formLogin(withDefaults())
-                .oauth2Login(withDefaults());
+                .httpBasic(withDefaults())
+                .formLogin(withDefaults());
         return http.build();
     }
-
-//    /**
-//     * 跨域过滤器配置
-//     * @return
-//     */
-//    @Bean
-//    public CorsFilter corsFilter() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedOrigin("*");
-//        configuration.setAllowCredentials(true);
-//        configuration.addAllowedMethod("*");
-//        configuration.addAllowedHeader("*");
-//        UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
-//        configurationSource.registerCorsConfiguration("/**", configuration);
-//        return new CorsFilter(configurationSource);
-//    }
 
 }
