@@ -31,6 +31,7 @@
         <redis-common-pool.version>2.12.0</redis-common-pool.version>
         <servlet-api.version>6.1.0</servlet-api.version>
         <lombok.version>1.18.34</lombok.version>
+        <fastjson.version>2.0.56</fastjson.version>
 
         <code-generator.version>1.0-SNAPSHOT</code-generator.version>
         <common.version>1.0-SNAPSHOT</common.version>
@@ -103,6 +104,13 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
 

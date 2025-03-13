@@ -15,6 +15,8 @@ public class ResultResponse<T> implements Serializable {
 
     private T data;
 
+    private Long total;
+
     public ResultResponse() {
     }
 
@@ -28,7 +30,7 @@ public class ResultResponse<T> implements Serializable {
         this.data = data;
     }
 
-    public boolean isSuccess() {
+    public boolean whetherSuccess() {
         return "00000".equals(this.code);
     }
 
@@ -36,10 +38,8 @@ public class ResultResponse<T> implements Serializable {
         return new ResultResponse<>(data);
     }
 
-    public ResultResponse<T> fail(String code, String message) {
-        this.code = code;
-        this.message = message;
-        return this;
+    public static <T> ResultResponse<T> fail(String code, String message, T data) {
+        return new ResultResponse<>(code, message, data);
     }
 
     public String getCode() {
@@ -64,5 +64,13 @@ public class ResultResponse<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 }

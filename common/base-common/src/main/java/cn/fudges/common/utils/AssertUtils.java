@@ -51,11 +51,11 @@ public class AssertUtils {
     }
 
     public static <T> void isSuccess(ResultResponse<T> response) {
-        isTrue(response.isSuccess(), response.getCode(), response.getMessage());
+        isTrue(response.whetherSuccess(), response.getCode(), response.getMessage());
     }
 
     public static <T> void isSuccess(ResultResponse<T> response, IResultCodeEnum resultCodeEnum) {
-        isTrue(response.isSuccess(), resultCodeEnum.getCode(), resultCodeEnum.getMessage());
+        isTrue(response.whetherSuccess(), resultCodeEnum.getCode(), resultCodeEnum.getMessage());
     }
 
     public static void isTrue(boolean bool, String code, String message) {

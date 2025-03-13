@@ -7,7 +7,6 @@ import cn.fudges.gatewayweb.service.UserService;
 import cn.fudges.user.response.UserBaseResponse;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -38,12 +37,15 @@ public class UserServiceImpl implements UserService {
                 .bodyToMono(new ParameterizedTypeReference<ResultResponse<UserBaseResponse>>() {})
                 .flatMap(userResponse -> {
                     AssertUtils.isSuccess(userResponse);
-                    UserDetail userDetail = BeanUtil.copyProperties(userResponse.getData(), UserDetail.class);
-                    userDetail.setName(userResponse.getData().getUserName());
-                    if (ObjectUtil.isAllNotEmpty(userResponse.getData(), userResponse.getData().getUserPassword())) {
-                        userDetail.setPassword(userResponse.getData().getUserPassword().getLoginPassword());
+                    if(ObjectUtil.isNotNull(userResponse.getData())) {
+                        UserDetail userDetail = BeanUtil.copyProperties(userResponse.getData(), UserDetail.class);
+                        userDetail.setName(userResponse.getData().getUserName());
+                        if (ObjectUtil.isAllNotEmpty(userResponse.getData(), userResponse.getData().getUserPassword())) {
+                            userDetail.setPassword(userResponse.getData().getUserPassword().getLoginPassword());
+                        }
+                        return Mono.just(userDetail);
                     }
-                    return Mono.just(userDetail);
+                    return Mono.empty();
                 });
     }
 }

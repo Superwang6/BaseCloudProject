@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UserBaseResponse extends ResponseEntity implements Serializable {
+public class UserBaseResponse extends ResponseEntity {
 
     private static final long serialVersionUID = 1L;
 

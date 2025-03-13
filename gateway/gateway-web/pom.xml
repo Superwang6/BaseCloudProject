@@ -61,6 +61,11 @@
             <artifactId>thymeleaf</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>cn.fudges</groupId>
             <artifactId>user-api</artifactId>
         </dependency>

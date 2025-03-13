@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -15,7 +17,10 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @ToString
-public class RequestEntity {
+public class RequestEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Integer pageNum;
 
