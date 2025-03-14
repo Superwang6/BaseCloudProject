@@ -8,7 +8,7 @@ spring:
   config:
     import:
       - classpath:routes/user-route.yaml
-      - nacos:gateway-routes-dev.yaml
+      - nacos:gateway-routes.yaml
   cloud:
     nacos:
       config:

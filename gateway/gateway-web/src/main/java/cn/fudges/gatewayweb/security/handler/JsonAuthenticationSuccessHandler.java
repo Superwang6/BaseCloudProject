@@ -4,20 +4,26 @@ import cn.fudges.common.result.ResultResponse;
 import cn.fudges.gatewayweb.mode.UserDetail;
 import cn.fudges.user.response.UserBaseResponse;
 import com.alibaba.fastjson.JSON;
+import lombok.RequiredArgsConstructor;
+import org.redisson.api.RedissonClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 /**
  * @author 王平远
  * @since 2025/3/13
  */
+@Component
+@RequiredArgsConstructor
 public class JsonAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 
+    private final RedissonClient redissonClient;
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange exchange, Authentication authentication) {

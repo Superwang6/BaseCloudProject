@@ -1,6 +1,7 @@
 package cn.fudges.role;
 
 import cn.fudges.core.GeneratorCore;
+import freemarker.core.Environment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class AutoGenerate {
 
-    static final String mysqlUrl = "jdbc:mysql://localhost:3306/nacos_devtest?useUnicode=true&characterEncoding=utf-8";
-    static final String username = "nacos";
-    static final String password = "nacos";
+    static final String mysqlUrl = "jdbc:mysql://local.fudges.cn:13307/cb_role?useUnicode=true&characterEncoding=utf-8";
+    static final String username = System.getenv("FUDGES_MYSQL_USERNAME");
+    static final String password = System.getenv("FUDGES_MYSQL_PASSWORD");
     static final List<String> tableNameList = Arrays.asList("role");
 
     public static void main(String[] args) {

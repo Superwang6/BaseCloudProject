@@ -1,7 +1,7 @@
 package cn.fudges.gatewayweb.security.converter;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -11,16 +11,14 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.io.IOException;
-import java.util.Map;
-
 /**
  * @author 王平远
  * @since 2025/3/13
  */
 public class JsonAuthenticationConverter implements ServerAuthenticationConverter {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public static final String USERNAME_KEY = "username";
+    public static final String PASSWORD_KEY = "password";
 
     @Override
     public Mono<Authentication> convert(ServerWebExchange exchange) {
@@ -31,17 +29,12 @@ public class JsonAuthenticationConverter implements ServerAuthenticationConverte
         return request.getBody()
                 .next()
                 .flatMap(dataBuffer -> {
-                    try {
-                        byte[] bytes = new byte[dataBuffer.readableByteCount()];
-                        dataBuffer.read(bytes);
-                        Map<String, String> authRequest = objectMapper.readValue(bytes, new TypeReference<>() {
-                        });
-                        String username = authRequest.get("username");
-                        String password = authRequest.get("password");
-                        return Mono.just(new UsernamePasswordAuthenticationToken(username, password));
-                    } catch (IOException e) {
-                        return Mono.empty();
-                    }
+                    byte[] bytes = new byte[dataBuffer.readableByteCount()];
+                    dataBuffer.read(bytes);
+                    JSONObject jsonObject = JSON.parseObject(bytes);
+                    String username = jsonObject.getString(USERNAME_KEY);
+                    String password = jsonObject.getString(PASSWORD_KEY);
+                    return Mono.just(new UsernamePasswordAuthenticationToken(username, password));
                 });
     }
 }

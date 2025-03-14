@@ -84,7 +84,6 @@ public class UserDetail implements UserDetails, Serializable {
 
     private String password;
 
-    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return AuthorityUtils.createAuthorityList(this.authorityIdList.stream().map(String::valueOf).collect(Collectors.toList()));

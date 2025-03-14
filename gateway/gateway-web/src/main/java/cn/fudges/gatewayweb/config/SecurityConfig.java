@@ -1,6 +1,7 @@
 package cn.fudges.gatewayweb.config;
 
 import cn.fudges.gatewayweb.security.converter.JsonAuthenticationConverter;
+import cn.fudges.gatewayweb.security.entrypoint.JsonAuthenticationEntryPoint;
 import cn.fudges.gatewayweb.security.handler.JsonAccessDeniedHandler;
 import cn.fudges.gatewayweb.security.handler.JsonAuthenticationFailureHandler;
 import cn.fudges.gatewayweb.security.handler.JsonAuthenticationSuccessHandler;
@@ -30,36 +31,37 @@ public class SecurityConfig {
 
     @Bean
     @Order(1)
-    public SecurityWebFilterChain authorizationServerSecurityFilterChain(ServerHttpSecurity http, UserDetailsRepositoryReactiveAuthenticationManager authenticationManager) {
+    public SecurityWebFilterChain authorizationServerSecurityFilterChain(ServerHttpSecurity http, AuthenticationWebFilter jsonAuthenticationWebFilter) {
         http
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/login/passwordLogin").permitAll()
                         .anyExchange().authenticated()
                 )
                 .exceptionHandling(exception -> exception
                         .accessDeniedHandler(new JsonAccessDeniedHandler())
-//                        .authenticationEntryPoint()
+                        .authenticationEntryPoint(new JsonAuthenticationEntryPoint())
                 )
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .addFilterAt(jsonAuthenticationWebFilter(authenticationManager), SecurityWebFiltersOrder.FORM_LOGIN)
+                .addFilterAt(jsonAuthenticationWebFilter, SecurityWebFiltersOrder.FORM_LOGIN)
                 .httpBasic(withDefaults())
-//                .formLogin(withDefaults())
         ;
         return http.build();
     }
 
-    public AuthenticationWebFilter jsonAuthenticationWebFilter(UserDetailsRepositoryReactiveAuthenticationManager authenticationManager) {
+    @Bean(name = "jsonAuthenticationWebFilter")
+    public AuthenticationWebFilter jsonAuthenticationWebFilter(UserDetailsRepositoryReactiveAuthenticationManager authenticationManager, JsonAuthenticationSuccessHandler jsonAuthenticationSuccessHandler) {
         AuthenticationWebFilter authFilter = new AuthenticationWebFilter(authenticationManager);
         authFilter.setServerAuthenticationConverter(new JsonAuthenticationConverter());
-        authFilter.setAuthenticationSuccessHandler(new JsonAuthenticationSuccessHandler());
+        authFilter.setAuthenticationSuccessHandler(jsonAuthenticationSuccessHandler);
         authFilter.setAuthenticationFailureHandler(new JsonAuthenticationFailureHandler());
         authFilter.setRequiresAuthenticationMatcher(new PathPatternParserServerWebExchangeMatcher("/login/passwordLogin"));
         return authFilter;
     }
 
     @Bean
-    public UserDetailsRepositoryReactiveAuthenticationManager authenticationManager(ReactiveUserDetailsService reactiveUserDetailsService,PasswordEncoder passwordEncoder) {
-        return new UserDetailsRepositoryReactiveAuthenticationManager(reactiveUserDetailsService);
+    public UserDetailsRepositoryReactiveAuthenticationManager authenticationManager(ReactiveUserDetailsService reactiveUserDetailsService, PasswordEncoder passwordEncoder) {
+        UserDetailsRepositoryReactiveAuthenticationManager authenticationManager = new UserDetailsRepositoryReactiveAuthenticationManager(reactiveUserDetailsService);
+        authenticationManager.setPasswordEncoder(passwordEncoder);
+        return authenticationManager;
     }
 
 
