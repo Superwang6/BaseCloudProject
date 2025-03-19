@@ -15,7 +15,7 @@ public class AutoGenerate {
     static final String mysqlUrl = "jdbc:mysql://sit.fudges.cn:13307/cb_user?useUnicode=true&characterEncoding=utf-8";
     static final String username = "root";
     static final String password = "601202";
-    static final List<String> tableNameList = Arrays.asList("user_password");
+    static final List<String> tableNameList = Arrays.asList("user_base");
 
     public static void main(String[] args) {
         GeneratorCore generatorCore = new GeneratorCore();

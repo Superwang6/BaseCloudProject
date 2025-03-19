@@ -63,7 +63,11 @@
         <dependency>
             <groupId>cn.fudges</groupId>
             <artifactId>code-generator</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>base-common</artifactId>
         </dependency>
     </dependencies>
 

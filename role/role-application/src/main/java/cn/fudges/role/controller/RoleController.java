@@ -1,18 +1,16 @@
 package cn.fudges.role.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author 王平远
- * @since 2024/9/13
+ *
+ * @author wangpingyuan
+ * @since 2025-03-17
  */
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/role/role")
 public class RoleController {
 
-    @RequestMapping("/test")
-    public String test(){
-        return "role test";
-    }
 }
+

@@ -4,9 +4,11 @@ import cn.fudges.common.result.ResultResponse;
 import cn.fudges.common.utils.AssertUtils;
 import cn.fudges.gatewayweb.mode.UserDetail;
 import cn.fudges.gatewayweb.service.UserService;
+import cn.fudges.user.request.UserBaseRequest;
 import cn.fudges.user.response.UserBaseResponse;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSON;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -30,9 +32,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Mono<UserDetails> queryUserByUsernameReactive(String username) {
-        return webClient.get()
-                .uri("/user/user-base/{username}", username)
+    public Mono<UserDetails> queryUserByUsernameReactive(UserBaseRequest request) {
+        return webClient.post()
+                .uri("/user/user-base/login")
+                .bodyValue(JSON.toJSONString(request))
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<ResultResponse<UserBaseResponse>>() {})
                 .flatMap(userResponse -> {
@@ -47,5 +50,10 @@ public class UserServiceImpl implements UserService {
                     }
                     return Mono.empty();
                 });
+    }
+
+    @Override
+    public Mono<UserDetails> findByUsername(String username) {
+        return null;
     }
 }

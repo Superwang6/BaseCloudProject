@@ -26,9 +26,9 @@ public class GeneratorCore {
     private String author = "author";
     private String moduleName = "";
     private String groupId = "cn.fudges";
-    private String mysqlUrl = "jdbc:mysql://localhost:3306/nacos_devtest?useUnicode=true&characterEncoding=utf-8";
-    private String username = "nacos";
-    private String password = "nacos";
+    private String mysqlUrl = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8";
+    private String username = "test";
+    private String password = "test";
     private List<String> tableNameList = Collections.singletonList("users");
     private List<CustomOutputFile> outputFileList = new ArrayList<>();
 

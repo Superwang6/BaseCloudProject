@@ -15,7 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserBaseService extends IService<UserBasePo> {
 
-    Boolean checkLoginUserNameAndPassword(UserBaseRequest request);
-
-    UserBase queryUserByUsername(String username);
+    UserBase queryUserByUsername(UserBaseRequest request);
 }

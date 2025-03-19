@@ -21,12 +21,5 @@ public class RoleServiceTest {
 
     @Test
     public void test() {
-        List<Role> roleList = new ArrayList<>();
-        Role role1 = new Role();
-        role1.setId(3);
-        role1.setName("3333");
-        role1.setRoleDesc("4444");
-        roleList.add(role1);
-        roleService.saveBatch(roleList);
     }
 }

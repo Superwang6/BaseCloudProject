@@ -1,6 +1,5 @@
 package cn.fudges.gatewayweb.mode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
@@ -83,6 +82,8 @@ public class UserDetail implements UserDetails, Serializable {
     private List<Long> authorityIdList;
 
     private String password;
+
+    private Integer platform;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

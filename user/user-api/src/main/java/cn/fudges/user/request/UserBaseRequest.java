@@ -80,6 +80,11 @@ public class UserBaseRequest extends RequestEntity implements Serializable {
     private Long tenantId;
 
     /**
+     * 平台，0-c端，1-b端
+     */
+    private Integer platform;
+
+    /**
      * 密码
      */
     private String password;

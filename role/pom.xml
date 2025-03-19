@@ -21,6 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <role.version>1.0-SNAPSHOT</role.version>
+        <code-generator.version>1.0-SNAPSHOT</code-generator.version>
     </properties>
 
     <dependencyManagement>
@@ -39,6 +40,11 @@
                 <groupId>cn.fudges</groupId>
                 <artifactId>role-infrastructure</artifactId>
                 <version>${role.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>code-generator</artifactId>
+                <version>${code-generator.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

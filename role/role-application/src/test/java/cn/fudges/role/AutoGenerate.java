@@ -22,6 +22,6 @@ public class AutoGenerate {
         GeneratorCore generatorCore = new GeneratorCore();
         generatorCore.initBase("wangpingyuan", "role", "cn.fudges.role");
         generatorCore.initMysql(mysqlUrl, username, password, tableNameList);
-        generatorCore.generate(true, true);
+        generatorCore.generate(true, false);
     }
 }

@@ -9,20 +9,25 @@ import java.util.Map;
  * @since 2024/8/19
  */
 public enum CustomOutputFile {
-    po("po", "Po.java", SubModule.infrastructure.name(), ".entity.po", null),
-    bo("bo", ".java",  SubModule.infrastructure.name(), ".entity", "templates/bo.java.ftl"),
+    // api
     request("request", "Request.java", SubModule.api.name(), ".request", "templates/request.java.ftl"),
     response("response", "Response.java", SubModule.api.name(), ".response", "templates/response.java.ftl"),
+    api("controller", "Api.java", SubModule.api.name(), ".api", "templates/api.java.ftl"),
+
+    // application
     service("service", "Service.java", SubModule.application.name(), ".service", "templates/service.java.ftl"),
     serviceImpl("serviceImpl", "ServiceImpl.java", SubModule.application.name(), ".service.impl", "templates/serviceImpl.java.ftl"),
+    apiImpl("apiImpl", "ApiImpl.java", SubModule.application.name(), ".controller.apiImpl", "templates/apiImpl.java.ftl"),
+    controller("controller", "Controller.java", SubModule.application.name(), ".controller", "templates/controller.java.ftl"),
+
+    // infrastructure
+    po("po", "Po.java", SubModule.infrastructure.name(), ".entity.po", null),
+    bo("bo", ".java",  SubModule.infrastructure.name(), ".entity", "templates/bo.java.ftl"),
     poDao("poDao", "PoMapper.java",  SubModule.infrastructure.name(), ".dao.po", null),
     boDao("boDao", "BoMapper.java",  SubModule.infrastructure.name(), ".dao.bo", "templates/bo_dao.java.ftl"),
     dao("dao", "Dao.java",  SubModule.infrastructure.name(), ".dao", "templates/dao.java.ftl"),
     poMapper("poMapper", "PoMapper.xml",  SubModule.infrastructure.name(), ".mapper.po", null),
-    boMapper("boMapper", "BoMapper.xml",  SubModule.infrastructure.name(), ".mapper", "templates/bo_mapper.xml.ftl"),
-    api("controller", "Api.java", SubModule.api.name(), ".api", "templates/api.java.ftl"),
-    apiImpl("apiImpl", "ApiImpl.java", SubModule.application.name(), ".controller.apiImpl", "templates/apiImpl.java.ftl"),
-    controller("controller", "Controller.java", SubModule.application.name(), ".controller", "templates/controller.java.ftl");
+    boMapper("boMapper", "BoMapper.xml",  SubModule.infrastructure.name(), ".mapper", "templates/bo_mapper.xml.ftl");
 
     private String name;
 

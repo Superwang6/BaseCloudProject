@@ -73,6 +73,10 @@
             <groupId>cn.fudges</groupId>
             <artifactId>user-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>gateway-common</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>

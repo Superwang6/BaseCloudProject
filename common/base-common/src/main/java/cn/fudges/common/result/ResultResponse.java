@@ -1,5 +1,7 @@
 package cn.fudges.common.result;
 
+import cn.hutool.core.bean.BeanUtil;
+
 import java.io.Serializable;
 
 /**
@@ -36,6 +38,10 @@ public class ResultResponse<T> implements Serializable {
 
     public static <T> ResultResponse<T> success(T data) {
         return new ResultResponse<>(data);
+    }
+
+    public static <T> ResultResponse<T> success(T data, Class<T> tClass) {
+        return new ResultResponse<>(BeanUtil.copyProperties(data, tClass));
     }
 
     public static <T> ResultResponse<T> fail(String code, String message, T data) {

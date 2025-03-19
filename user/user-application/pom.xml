@@ -66,6 +66,10 @@
             <groupId>cn.fudges</groupId>
             <artifactId>user-infrastructure</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>user-integration</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>

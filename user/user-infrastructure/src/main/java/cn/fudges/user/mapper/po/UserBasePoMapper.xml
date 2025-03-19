@@ -15,11 +15,12 @@
         <result column="create_time" property="createTime" />
         <result column="modify_time" property="modifyTime" />
         <result column="tenant_id" property="tenantId" />
+        <result column="platform" property="platform" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_name, mobile_phone, nick_name, auth_status, id_num, real_name, status, create_time, modify_time, tenant_id
+        id, user_name, mobile_phone, nick_name, auth_status, id_num, real_name, status, create_time, modify_time, tenant_id, platform
     </sql>
 
     <!-- 连表查询结果列 -->
@@ -34,6 +35,7 @@
         ${tableName}.status, 
         ${tableName}.create_time, 
         ${tableName}.modify_time, 
-        ${tableName}.tenant_id
+        ${tableName}.tenant_id, 
+        ${tableName}.platform
     </sql>
 </mapper>

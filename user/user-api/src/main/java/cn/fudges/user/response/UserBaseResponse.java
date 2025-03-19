@@ -2,6 +2,8 @@ package cn.fudges.user.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import cn.fudges.baseapi.response.ResponseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -80,4 +82,8 @@ public class UserBaseResponse extends ResponseEntity {
     private Long tenantId;
 
     private UserPasswordResponse userPassword;
+
+    private List<Integer> authoriyIdList;
+
+    private Integer platform;
 }

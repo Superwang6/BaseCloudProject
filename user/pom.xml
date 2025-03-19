@@ -16,6 +16,7 @@
         <module>user-api</module>
         <module>user-infrastructure</module>
         <module>user-application</module>
+        <module>user-integration</module>
     </modules>
 
     <properties>
@@ -23,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <user.version>1.0-SNAPSHOT</user.version>
+        <role.version>1.0-SNAPSHOT</role.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -40,6 +42,17 @@
                 <groupId>cn.fudges</groupId>
                 <artifactId>user-application</artifactId>
                 <version>${user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>user-integration</artifactId>
+                <version>${user.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>role-api</artifactId>
+                <version>${role.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

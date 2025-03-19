@@ -4,6 +4,8 @@ import cn.fudges.user.entity.po.UserBasePo;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户基础信息
@@ -20,4 +22,6 @@ import lombok.experimental.SuperBuilder;
 public class UserBase extends UserBasePo {
 
     private UserPassword userPassword;
+
+    private List<Integer> authorityIdList;
 }

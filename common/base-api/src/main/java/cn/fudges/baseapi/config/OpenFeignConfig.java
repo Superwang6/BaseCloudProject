@@ -32,7 +32,6 @@ public class OpenFeignConfig {
                 .build();
     }
 
-    @Bean
     public ConnectionPool pool() {
         return new ConnectionPool(200,5, TimeUnit.MINUTES);
     }

@@ -6,32 +6,28 @@
     <resultMap id="BaseResultMap" type="cn.fudges.role.entity.po.RolePo">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="role_desc" property="roleDesc" />
-        <result column="tyint" property="tyint" />
-        <result column="ot" property="ot" />
-        <result column="doub" property="doub" />
-        <result column="time" property="time" />
-        <result column="dat" property="dat" />
-        <result column="timestamp" property="timestamp" />
-        <result column="text" property="text" />
+        <result column="remark" property="remark" />
+        <result column="is_remove" property="isRemove" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="is_admin" property="isAdmin" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, role_desc, tyint, ot, doub, time, dat, timestamp, text
+        id, name, remark, is_remove, tenant_id, is_admin, create_time, update_time
     </sql>
 
     <!-- 连表查询结果列 -->
     <sql id="Column_List_With_TableName">
         ${tableName}.id, 
         ${tableName}.name, 
-        ${tableName}.role_desc, 
-        ${tableName}.tyint, 
-        ${tableName}.ot, 
-        ${tableName}.doub, 
-        ${tableName}.time, 
-        ${tableName}.dat, 
-        ${tableName}.timestamp, 
-        ${tableName}.text
+        ${tableName}.remark, 
+        ${tableName}.is_remove, 
+        ${tableName}.tenant_id, 
+        ${tableName}.is_admin, 
+        ${tableName}.create_time, 
+        ${tableName}.update_time
     </sql>
 </mapper>

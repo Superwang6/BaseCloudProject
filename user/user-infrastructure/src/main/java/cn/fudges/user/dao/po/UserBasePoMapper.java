@@ -1,6 +1,5 @@
 package cn.fudges.user.dao.po;
 
-import cn.fudges.user.entity.UserBase;
 import cn.fudges.user.entity.po.UserBasePo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -10,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-10-17
+ * @since 2025-03-17
  */
 public interface UserBasePoMapper extends BaseMapper<UserBasePo> {
 

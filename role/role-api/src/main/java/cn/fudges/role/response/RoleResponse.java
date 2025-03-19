@@ -1,49 +1,66 @@
 package cn.fudges.role.response;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+import cn.fudges.baseapi.response.ResponseEntity;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <p>
- * 
+ * 角色表
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-08-20
+ * @since 2025-03-17
  */
-@Getter
-@Setter
-public class RoleResponse implements Serializable {
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class RoleResponse extends ResponseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 
-    private Integer id;
+    /**
+     * 主键
+     */
+    private Long id;
 
+    /**
+     * 角色名称
+     */
     private String name;
 
-    private String roleDesc;
+    /**
+     * 描述
+     */
+    private String desc;
 
     /**
-     * 注释111
+     * 是否删除，0-否，1-是
      */
-    private Boolean tyint;
+    private Integer isRemove;
 
     /**
-     * 注释2222
+     * 所属租户
      */
-    private Integer ot;
+    private Long tenantId;
 
-    private Long doub;
+    /**
+     * 是否超管，0-否，1-是。超管拥有所有权限，不需要绑定
+     */
+    private Integer isAdmin;
 
-    private LocalDateTime time;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 
-    private LocalDate dat;
-
-    private LocalDateTime timestamp;
-
-    private String text;
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 }

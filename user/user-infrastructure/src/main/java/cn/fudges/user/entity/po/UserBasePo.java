@@ -6,8 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -16,7 +15,7 @@ import lombok.experimental.SuperBuilder;
  * </p>
  *
  * @author wangpingyuan
- * @since 2024-10-17
+ * @since 2025-03-17
  */
 @Data
 @SuperBuilder
@@ -91,4 +90,10 @@ public class UserBasePo implements Serializable {
      */
     @TableField("tenant_id")
     private Long tenantId;
+
+    /**
+     * 平台，0-c端，1-b端
+     */
+    @TableField("platform")
+    private Integer platform;
 }
