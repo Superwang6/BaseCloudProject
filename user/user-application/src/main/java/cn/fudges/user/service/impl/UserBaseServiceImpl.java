@@ -1,5 +1,6 @@
 package cn.fudges.user.service.impl;
 
+import cn.fudges.user.dao.UserBaseDao;
 import cn.fudges.user.entity.UserPassword;
 import cn.fudges.user.entity.po.UserBasePo;
 import cn.fudges.user.entity.po.UserPasswordPo;
@@ -28,7 +29,9 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class UserBaseServiceImpl extends ServiceImpl<UserBasePoMapper, UserBasePo> implements UserBaseService {
+public class UserBaseServiceImpl implements UserBaseService {
+
+    private final UserBaseDao userBaseDao;
 
     private final UserPasswordService userPasswordService;
 
@@ -38,17 +41,28 @@ public class UserBaseServiceImpl extends ServiceImpl<UserBasePoMapper, UserBaseP
     public UserBase queryUserByUsername(UserBaseRequest request) {
         QueryWrapper<UserBasePo> wrapper = new QueryWrapper<>();
         wrapper.eq("user_name", request.getUserName()).eq("platform", request.getPlatform());
-        UserBasePo one = getOne(wrapper);
+        UserBasePo one = userBaseDao.getOne(wrapper);
         UserBase base = BeanUtil.copyProperties(one, UserBase.class);
 
         if(ObjectUtil.isNotNull(base)) {
-            QueryWrapper<UserPasswordPo> passwordQueryWrapper = new QueryWrapper<>();
-            passwordQueryWrapper.eq("user_id", base.getId());
-            UserPassword password = BeanUtil.copyProperties(userPasswordService.getOne(passwordQueryWrapper), UserPassword.class);
+            UserPassword password = userPasswordService.queryPasswordByUserId(base.getId());
             base.setUserPassword(password);
 
             List<Integer> authorityIdList = roleAuthorityIntegration.queryAuthorityIdListByUserId(base.getId());
             base.setAuthorityIdList(authorityIdList);
+        }
+        return base;
+    }
+
+    @Override
+    public UserBase queryUserByUserId(Long userId) {
+        UserBasePo userBasePo = userBaseDao.getById(userId);
+        UserBase base = BeanUtil.copyProperties(userBasePo, UserBase.class);
+        if(ObjectUtil.isNotNull(base)) {
+            QueryWrapper<UserPasswordPo> passwordQueryWrapper = new QueryWrapper<>();
+            passwordQueryWrapper.eq("user_id", base.getId());
+            UserPassword password = userPasswordService.queryPasswordByUserId(base.getId());
+            base.setUserPassword(password);
         }
         return base;
     }

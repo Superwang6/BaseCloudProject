@@ -1,6 +1,7 @@
 package cn.fudges.gatewayweb.security.handler;
 
 import cn.fudges.common.result.ResultResponse;
+import cn.fudges.common.utils.authentication.AuthenticationUtils;
 import cn.fudges.gateway.common.enums.GatewayRedisKey;
 import cn.fudges.gatewayweb.mode.UserDetail;
 import cn.fudges.user.response.UserBaseResponse;
@@ -34,10 +35,23 @@ public class JsonAuthenticationSuccessHandler implements ServerAuthenticationSuc
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
 
         // 存入redis
-        RBucket<Object> bucket = redissonClient.getBucket(GatewayRedisKey.USER_DETAIL_PREFIX + userDetail.getId());
+        RBucket<Object> bucket = redissonClient.getBucket(GatewayRedisKey.USER_USER_DETAIL_PREFIX + userDetail.getId());
         bucket.set(userDetail, Duration.ofDays(10));
 
-        ResultResponse<?> res = ResultResponse.success(UserBaseResponse.builder().id(userDetail.getId()).nickName(userDetail.getNickName()).mobilePhone(userDetail.getMobilePhone()).tenantId(userDetail.getTenantId()).platform(userDetail.getPlatform()).build());
+        String token = AuthenticationUtils.encode(userDetail.getId().toString());
+
+        ResultResponse<?> res = ResultResponse.success(
+                UserBaseResponse.builder()
+                        .id(userDetail.getId())
+                        .nickName(userDetail.getNickName())
+                        .mobilePhone(userDetail.getMobilePhone())
+                        .tenantId(userDetail.getTenantId())
+                        .platform(userDetail.getPlatform())
+                        .authorityIdList(userDetail.getAuthorityIdList())
+                        .authorization(token)
+                        .build()
+        );
+
         ServerHttpResponse response = exchange.getExchange().getResponse();
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         response.setStatusCode(HttpStatus.OK);

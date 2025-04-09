@@ -1,6 +1,6 @@
 package cn.fudges.gatewayweb.security.converter;
 
-import cn.fudges.gatewayweb.security.token.FudgesUsernamePasswordAuthenticationToken;
+import cn.fudges.gatewayweb.security.token.UsernamePasswordAuthenticationToken;
 import cn.fudges.gatewayweb.utils.GatewayHeaderUtils;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSON;
@@ -43,7 +43,7 @@ public class JsonAuthenticationConverter implements ServerAuthenticationConverte
                     JSONObject jsonObject = JSON.parseObject(bytes);
                     String username = jsonObject.getString(USERNAME_KEY);
                     String password = jsonObject.getString(PASSWORD_KEY);
-                    FudgesUsernamePasswordAuthenticationToken token = new FudgesUsernamePasswordAuthenticationToken(username, password, platform);
+                    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, platform);
                     return Mono.just(token);
                 });
     }

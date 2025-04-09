@@ -20,3 +20,4 @@ spring:
 logging:
   level:
     cn.fudges: debug
+    org.springframework.web: debug

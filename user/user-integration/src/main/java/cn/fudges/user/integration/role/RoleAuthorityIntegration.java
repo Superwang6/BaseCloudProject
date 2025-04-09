@@ -2,6 +2,7 @@ package cn.fudges.user.integration.role;
 
 import cn.fudges.common.result.ResultResponse;
 import cn.fudges.common.utils.AssertUtils;
+import cn.fudges.role.api.RoleAuthorityApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoleAuthorityIntegration {
 
-//    private final RoleAuthorityApi roleAuthorityApi;
+    private final RoleAuthorityApi roleAuthorityApi;
 
     public List<Integer> queryAuthorityIdListByUserId(Long userId) {
-//        ResultResponse<List<Integer>> response =  roleAuthorityApi.queryAuthorityIdListByUserId(userId);
-//        AssertUtils.isSuccess(response);
-//        return response.getData();
-        return null;
+        ResultResponse<List<Integer>> response =  roleAuthorityApi.queryAuthorityIdListByUserId(userId);
+        AssertUtils.isSuccess(response);
+        return response.getData();
     }
 }

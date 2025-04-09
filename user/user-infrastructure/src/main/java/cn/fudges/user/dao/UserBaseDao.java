@@ -1,6 +1,5 @@
 package cn.fudges.user.dao;
 
-import cn.fudges.user.entity.UserBase;
 import cn.fudges.user.dao.po.UserBasePoMapper;
 import cn.fudges.user.entity.po.UserBasePo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

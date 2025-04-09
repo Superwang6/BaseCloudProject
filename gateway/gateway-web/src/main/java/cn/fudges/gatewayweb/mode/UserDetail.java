@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 王平远
@@ -79,7 +80,7 @@ public class UserDetail implements UserDetails, Serializable {
     /**
      * 权限id列表
      */
-    private List<Long> authorityIdList;
+    private List<Integer> authorityIdList;
 
     private String password;
 
@@ -87,8 +88,7 @@ public class UserDetail implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return AuthorityUtils.createAuthorityList(this.authorityIdList.stream().map(String::valueOf).collect(Collectors.toList()));
-        return AuthorityUtils.createAuthorityList("query");
+        return AuthorityUtils.createAuthorityList(this.authorityIdList.stream().map(String::valueOf).collect(Collectors.toList()));
     }
 
     @Override

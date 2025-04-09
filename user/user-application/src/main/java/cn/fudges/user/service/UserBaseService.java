@@ -13,7 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author wangpingyuan
  * @since 2024-09-27
  */
-public interface UserBaseService extends IService<UserBasePo> {
+public interface UserBaseService {
 
     UserBase queryUserByUsername(UserBaseRequest request);
+
+    UserBase queryUserByUserId(Long userId);
 }

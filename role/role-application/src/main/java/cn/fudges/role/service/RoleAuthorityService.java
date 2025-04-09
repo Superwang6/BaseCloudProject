@@ -13,7 +13,7 @@ import java.util.List;
  * @author wangpingyuan
  * @since 2025-03-17
  */
-public interface RoleAuthorityService extends IService<RoleAuthorityPo> {
+public interface RoleAuthorityService {
 
     List<Integer> queryAuthorityIdListByUserId(Long userId);
 }

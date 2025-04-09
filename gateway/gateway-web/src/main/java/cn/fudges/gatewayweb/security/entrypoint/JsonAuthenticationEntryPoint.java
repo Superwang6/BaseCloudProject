@@ -22,7 +22,7 @@ public class JsonAuthenticationEntryPoint implements ServerAuthenticationEntryPo
         ServerHttpResponse response = exchange.getResponse();
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         response.setStatusCode(HttpStatus.OK);
-        ResultResponse<Object> fail = ResultResponse.fail(ResultCodeEnum.PERMISSION_DENIED.getCode(), ResultCodeEnum.PERMISSION_DENIED.getMessage(), null);
-        return response.writeWith(Mono.fromSupplier(() -> response.bufferFactory().wrap(JSON.toJSONBytes(fail))));
+        ResultResponse<Object> fail = ResultResponse.fail(ResultCodeEnum.NO_LOGIN.getCode(), ResultCodeEnum.NO_LOGIN.getMessage(), null);
+        return response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(fail))));
     }
 }

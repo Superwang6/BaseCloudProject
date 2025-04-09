@@ -2,9 +2,10 @@ package cn.fudges.gatewayweb.config;
 
 import cn.fudges.gatewayweb.security.entrypoint.JsonAuthenticationEntryPoint;
 import cn.fudges.gatewayweb.security.filter.LoginAuthenticationWebFilter;
+import cn.fudges.gatewayweb.security.filter.ParseAuthenticationWebFilter;
 import cn.fudges.gatewayweb.security.handler.JsonAccessDeniedHandler;
 import cn.fudges.gatewayweb.security.handler.JsonAuthenticationSuccessHandler;
-import cn.fudges.gatewayweb.security.manager.FudgesUserDetailsRepositoryReactiveAuthenticationManager;
+import cn.fudges.gatewayweb.security.manager.UserDetailsReactiveAuthenticationManager;
 import cn.fudges.gatewayweb.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ public class SecurityConfig {
 
     @Bean
     @Order(1)
-    public SecurityWebFilterChain authorizationServerSecurityFilterChain(ServerHttpSecurity http, LoginAuthenticationWebFilter loginAuthenticationWebFilter) {
+    public SecurityWebFilterChain authorizationServerSecurityFilterChain(ServerHttpSecurity http, LoginAuthenticationWebFilter loginAuthenticationWebFilter, ParseAuthenticationWebFilter parseAuthenticationWebFilter) {
         http
                 .authorizeExchange(exchanges -> exchanges
                         .anyExchange().authenticated()
@@ -39,8 +40,8 @@ public class SecurityConfig {
                         .authenticationEntryPoint(new JsonAuthenticationEntryPoint())
                 )
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .addFilterAt(loginAuthenticationWebFilter, SecurityWebFiltersOrder.FORM_LOGIN)
-                .httpBasic(withDefaults())
+                .addFilterAt(loginAuthenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+                .addFilterBefore(parseAuthenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
         ;
         return http.build();
     }
@@ -52,7 +53,7 @@ public class SecurityConfig {
 
     @Bean
     public ReactiveAuthenticationManager authenticationManager(UserService userService, PasswordEncoder passwordEncoder) {
-        return new FudgesUserDetailsRepositoryReactiveAuthenticationManager(userService, passwordEncoder);
+        return new UserDetailsReactiveAuthenticationManager(userService, passwordEncoder);
     }
 
 

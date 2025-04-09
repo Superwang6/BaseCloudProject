@@ -11,6 +11,6 @@ import ${superServiceClassPackage};
  * @author ${author}
  * @since ${date}
  */
-public interface ${entity}Service extends ${superServiceClass}<${entity}Po> {
+public interface ${entity}Service {
 
 }

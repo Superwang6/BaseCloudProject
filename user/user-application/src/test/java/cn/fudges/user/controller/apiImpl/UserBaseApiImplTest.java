@@ -21,19 +21,4 @@ class UserBaseApiImplTest {
     @Autowired
     UserBaseApi userBaseApi;
 
-    @Test
-    void queryUserByUsername() {
-        ResultResponse<UserBaseResponse> admin = userBaseApi.queryUserByUsername("admin");
-        System.out.println(admin);
-    }
-
-    @Test
-    void test() {
-//        UserPasswordPo po = UserPasswordPo.builder().loginPassword("11111").build();
-        UserPassword password = UserPassword.builder().loginPassword("2222").build();
-        UserBase use =  UserBase.builder().userPassword(password).id(1L).nickName("test").build();
-
-        UserBase userBase = BeanUtil.copyProperties(use, UserBase.class);
-        System.out.println(userBase);
-    }
 }

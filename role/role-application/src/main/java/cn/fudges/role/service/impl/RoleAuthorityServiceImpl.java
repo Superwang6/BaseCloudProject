@@ -2,6 +2,7 @@ package cn.fudges.role.service.impl;
 
 import cn.fudges.common.result.ResultCodeEnum;
 import cn.fudges.common.utils.AssertUtils;
+import cn.fudges.role.dao.RoleAuthorityDao;
 import cn.fudges.role.entity.RoleUser;
 import cn.fudges.role.entity.po.AuthorityPo;
 import cn.fudges.role.entity.po.RoleUserPo;
@@ -31,13 +32,15 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class RoleAuthorityServiceImpl extends ServiceImpl<RoleAuthorityPoMapper, RoleAuthorityPo> implements RoleAuthorityService {
+public class RoleAuthorityServiceImpl implements RoleAuthorityService {
 
     private final RoleService roleService;
 
     private final RoleUserService roleUserService;
 
     private final AuthorityService authorityService;
+
+    private final RoleAuthorityDao roleAuthorityDao;
 
     @Override
     public List<Integer> queryAuthorityIdListByUserId(Long userId) {
@@ -54,12 +57,12 @@ public class RoleAuthorityServiceImpl extends ServiceImpl<RoleAuthorityPoMapper,
             QueryWrapper<AuthorityPo> authorityWrapper = new QueryWrapper<>();
             authorityWrapper.eq("is_leaf", 1).eq("is_visible", 1).orderByAsc("id");
             List<AuthorityPo> authorityPoList = authorityService.list(authorityWrapper);
-            return Lists.newArrayList(authorityPoList.stream().map(AuthorityPo::getId).collect(Collectors.toSet()));
+            return authorityPoList.stream().map(AuthorityPo::getId).collect(Collectors.toList());
         } else {
             QueryWrapper<RoleAuthorityPo> roleAuthorityWrapper = new QueryWrapper<>();
-            roleAuthorityWrapper.in("role_id", roleIdSet);
-            List<RoleAuthorityPo> roleAuthorityPoList = list(roleAuthorityWrapper);
-            return Lists.newArrayList(roleAuthorityPoList.stream().map(RoleAuthorityPo::getAuthorityId).collect(Collectors.toSet()));
+            roleAuthorityWrapper.in("role_id", roleIdSet).orderByAsc("id");
+            List<RoleAuthorityPo> roleAuthorityPoList = roleAuthorityDao.list(roleAuthorityWrapper);
+            return roleAuthorityPoList.stream().map(RoleAuthorityPo::getAuthorityId).collect(Collectors.toList());
         }
     }
 }

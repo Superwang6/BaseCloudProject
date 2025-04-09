@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @author 王平远
  * @since 2024/8/20
  */
-
 public class ResultResponse<T> implements Serializable {
 
     private String code = "00000";

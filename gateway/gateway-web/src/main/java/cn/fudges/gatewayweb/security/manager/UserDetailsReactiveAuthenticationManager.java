@@ -1,7 +1,7 @@
 package cn.fudges.gatewayweb.security.manager;
 
 import cn.fudges.gatewayweb.mode.UserDetail;
-import cn.fudges.gatewayweb.security.token.FudgesUsernamePasswordAuthenticationToken;
+import cn.fudges.gatewayweb.security.token.UsernamePasswordAuthenticationToken;
 import cn.fudges.gatewayweb.service.UserService;
 import cn.fudges.user.request.UserBaseRequest;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +24,17 @@ import reactor.core.scheduler.Schedulers;
  */
 @ComponentScan
 @RequiredArgsConstructor
-public class FudgesUserDetailsRepositoryReactiveAuthenticationManager extends AbstractUserDetailsReactiveAuthenticationManager {
+public class UserDetailsReactiveAuthenticationManager extends AbstractUserDetailsReactiveAuthenticationManager {
 
     private final UserService userService;
 
     private final PasswordEncoder passwordEncoder;
 
-    private Scheduler scheduler = Schedulers.boundedElastic();
+    private final Scheduler scheduler = Schedulers.boundedElastic();
 
-    private UserDetailsChecker preAuthenticationChecks = this::defaultPreAuthenticationChecks;
+    private final UserDetailsChecker preAuthenticationChecks = this::defaultPreAuthenticationChecks;
 
-    private UserDetailsChecker postAuthenticationChecks = this::defaultPostAuthenticationChecks;
+    private final UserDetailsChecker postAuthenticationChecks = this::defaultPostAuthenticationChecks;
 
     private ReactiveCompromisedPasswordChecker compromisedPasswordChecker;
 
@@ -71,7 +71,7 @@ public class FudgesUserDetailsRepositoryReactiveAuthenticationManager extends Ab
 
         UserBaseRequest request = new UserBaseRequest();
         request.setUserName(username);
-        if(authentication instanceof FudgesUsernamePasswordAuthenticationToken token) {
+        if(authentication instanceof UsernamePasswordAuthenticationToken token) {
             Integer platform = token.getPlatform();
             request.setPlatform(platform);
         }
@@ -96,22 +96,21 @@ public class FudgesUserDetailsRepositoryReactiveAuthenticationManager extends Ab
                         "The provided password is compromised, please change your password")));
     }
 
-    private FudgesUsernamePasswordAuthenticationToken createUsernamePasswordAuthenticationToken(UserDetails userDetails) {
+    private UsernamePasswordAuthenticationToken createUsernamePasswordAuthenticationToken(UserDetails userDetails) {
         Integer platform = 0;
         if(userDetails instanceof UserDetail user) {
             platform = user.getPlatform();
         }
-        return new FudgesUsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword(),userDetails.getAuthorities(),platform);
+        return new UsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword(),userDetails.getAuthorities(),platform);
+    }
+
+    @Override
+    protected Mono<UserDetails> retrieveUser(String username) {
+        return null;
     }
 
 
     private Mono<UserDetails> queryUser(UserBaseRequest request) {
         return userService.queryUserByUsernameReactive(request);
-    }
-
-
-    @Override
-    protected Mono<UserDetails> retrieveUser(String username) {
-        return Mono.empty();
     }
 }

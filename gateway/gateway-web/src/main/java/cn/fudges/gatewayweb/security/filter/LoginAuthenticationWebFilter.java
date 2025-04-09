@@ -2,10 +2,9 @@ package cn.fudges.gatewayweb.security.filter;
 
 import cn.fudges.gatewayweb.security.converter.JsonAuthenticationConverter;
 import cn.fudges.gatewayweb.security.handler.JsonAuthenticationFailureHandler;
-import cn.fudges.gatewayweb.security.handler.JsonAuthenticationSuccessHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.core.log.LogMessage;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.ReactiveAuthenticationManagerResolver;
 import org.springframework.security.core.Authentication;
@@ -31,12 +30,12 @@ import reactor.core.publisher.Mono;
 
 public class LoginAuthenticationWebFilter implements WebFilter {
 
-    private static final Log logger = LogFactory.getLog(LoginAuthenticationWebFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginAuthenticationWebFilter.class);
 
     private final ReactiveAuthenticationManagerResolver<ServerWebExchange> authenticationManagerResolver;
 
-    private final ServerWebExchangeMatcher backendServerWebExchangeMatcher = new PathPatternParserServerWebExchangeMatcher("/admin/login/password-login");
-    private final ServerWebExchangeMatcher webServerWebExchangeMatcher = new PathPatternParserServerWebExchangeMatcher("/login/passwordLogin");
+    private final ServerWebExchangeMatcher backendServerWebExchangeMatcher = new PathPatternParserServerWebExchangeMatcher("/admin/login/password");
+    private final ServerWebExchangeMatcher webServerWebExchangeMatcher = new PathPatternParserServerWebExchangeMatcher("/login/password");
 
     private final ServerAuthenticationConverter authenticationConverter = new JsonAuthenticationConverter();
 
@@ -60,13 +59,13 @@ public class LoginAuthenticationWebFilter implements WebFilter {
         this.authenticationSuccessHandler = authenticationSuccessHandler;
     }
 
+    @NotNull
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        Mono<ServerWebExchangeMatcher.MatchResult> backendMono = backendServerWebExchangeMatcher.matches(exchange)
-                .filter(ServerWebExchangeMatcher.MatchResult::isMatch);
-        Mono<ServerWebExchangeMatcher.MatchResult> webMono = webServerWebExchangeMatcher.matches(exchange)
-                .filter(ServerWebExchangeMatcher.MatchResult::isMatch);
+    public Mono<Void> filter(@NotNull ServerWebExchange exchange, WebFilterChain chain) {
+        Mono<ServerWebExchangeMatcher.MatchResult> backendMono = backendServerWebExchangeMatcher.matches(exchange);
+        Mono<ServerWebExchangeMatcher.MatchResult> webMono = webServerWebExchangeMatcher.matches(exchange);
         return Mono.firstWithValue(backendMono, webMono)
+                .filter(ServerWebExchangeMatcher.MatchResult::isMatch)
                 .flatMap((matchResult) -> this.authenticationConverter.convert(exchange))
                 .switchIfEmpty(chain.filter(exchange).then(Mono.empty()))
                 .flatMap((token) -> authenticate(exchange, chain, token))
@@ -82,7 +81,7 @@ public class LoginAuthenticationWebFilter implements WebFilter {
                 .flatMap(
                         (authentication) -> onAuthenticationSuccess(authentication, new WebFilterExchange(exchange, chain)))
                 .doOnError(AuthenticationException.class,
-                        (ex) -> logger.debug(LogMessage.format("Authentication failed: %s", ex.getMessage()), ex));
+                        (ex) -> logger.debug("Authentication failed: {}", ex.getMessage()));
     }
 
     protected Mono<Void> onAuthenticationSuccess(Authentication authentication, WebFilterExchange webFilterExchange) {

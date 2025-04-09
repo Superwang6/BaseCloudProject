@@ -83,7 +83,9 @@ public class UserBaseResponse extends ResponseEntity {
 
     private UserPasswordResponse userPassword;
 
-    private List<Integer> authoriyIdList;
+    private List<Integer> authorityIdList;
 
     private Integer platform;
+
+    private String authorization;
 }
