@@ -7,5 +7,9 @@ package cn.fudges.gateway.common.enums;
 
 public class GatewayRedisKey {
 
-    public static final String USER_USER_DETAIL_PREFIX = "user:user-detail:";
+    public static final String USER_LOGIN_USER_DETAIL_PREFIX = "user:login:user-detail:";
+
+    public static final String USER_LOGIN_USER_TOKEN_PREFIX = "user:login:user-token:";
+
+    public static final String USER_LOGIN_TOKEN_USER_PREFIX = "user:login:token-user:";
 }

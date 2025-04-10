@@ -1,10 +1,10 @@
 package cn.fudges.gatewayweb.security.handler;
 
 import cn.fudges.common.result.ResultResponse;
-import cn.fudges.common.utils.authentication.AuthenticationUtils;
 import cn.fudges.gateway.common.enums.GatewayRedisKey;
 import cn.fudges.gatewayweb.mode.UserDetail;
 import cn.fudges.user.response.UserBaseResponse;
+import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RBucket;
@@ -34,11 +34,27 @@ public class JsonAuthenticationSuccessHandler implements ServerAuthenticationSuc
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange exchange, Authentication authentication) {
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
 
-        // 存入redis
-        RBucket<Object> bucket = redissonClient.getBucket(GatewayRedisKey.USER_USER_DETAIL_PREFIX + userDetail.getId());
-        bucket.set(userDetail, Duration.ofDays(10));
+        String token;
+        // 存入userid -> 用户信息映射
+        RBucket<Object> bucket = redissonClient.getBucket(GatewayRedisKey.USER_LOGIN_USER_DETAIL_PREFIX + userDetail.getId());
+        RBucket<String> userBucket = redissonClient.getBucket(GatewayRedisKey.USER_LOGIN_USER_TOKEN_PREFIX + userDetail.getId());
+        if (bucket.isExists()) {
+            // 如果之前登陆过则延长登录时间
+            bucket.expire(Duration.ofDays(10));
+            userBucket.expire(Duration.ofDays(10));
 
-        String token = AuthenticationUtils.encode(userDetail.getId().toString());
+            token = userBucket.get();
+            RBucket<Long> tokenBucket = redissonClient.getBucket(GatewayRedisKey.USER_LOGIN_TOKEN_USER_PREFIX + token);
+            tokenBucket.expire(Duration.ofDays(10));
+        } else {
+            bucket.set(userDetail, Duration.ofDays(10));
+
+            token = IdUtil.fastSimpleUUID();
+            userBucket.set(token, Duration.ofDays(10));
+
+            RBucket<Long> tokenBucket = redissonClient.getBucket(GatewayRedisKey.USER_LOGIN_TOKEN_USER_PREFIX + token);
+            tokenBucket.set(userDetail.getId(), Duration.ofDays(10));
+        }
 
         ResultResponse<?> res = ResultResponse.success(
                 UserBaseResponse.builder()

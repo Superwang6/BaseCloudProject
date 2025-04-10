@@ -33,6 +33,7 @@
         <lombok.version>1.18.34</lombok.version>
         <fastjson.version>2.0.56</fastjson.version>
         <redission.version>3.45.0</redission.version>
+        <jackson.data.version>2.18.3</jackson.data.version>
 
         <code-generator.version>1.0-SNAPSHOT</code-generator.version>
         <common.version>1.0-SNAPSHOT</common.version>
@@ -121,6 +122,11 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redission.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.data.version}</version>
             </dependency>
 
 
