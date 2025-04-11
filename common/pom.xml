@@ -13,6 +13,7 @@
     <modules>
         <module>base-api</module>
         <module>base-common</module>
+        <module>base-authority</module>
     </modules>
 
     <properties>

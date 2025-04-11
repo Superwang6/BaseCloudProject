@@ -30,5 +30,10 @@ public class UserBaseController {
     public ResultResponse<UserBaseResponse> detail(@PathVariable("userId") Long userId) {
         return ResultResponse.success(BeanUtil.copyProperties(userBaseService.queryUserByUserId(userId), UserBaseResponse.class));
     }
+
+//    @PostMapping("/register")
+//    public ResultResponse<UserBaseResponse> register() {
+//
+//    }
 }
 

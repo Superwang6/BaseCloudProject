@@ -14,7 +14,6 @@
         <module>user</module>
         <module>role</module>
         <module>gateway</module>
-        <module>oauth2</module>
     </modules>
 
     <properties>
