@@ -8,4 +8,5 @@ package cn.fudges.common.enums;
 public class RequestEnum {
 
     public static final String USER_ID = "X-USER-ID";
+    public static final String USER_DETAIL = "X-USER-DETAIL";
 }

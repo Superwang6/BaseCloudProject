@@ -27,6 +27,7 @@ public class UserBaseController {
 
     @PostMapping("/detail/{userId}")
     public ResultResponse<UserBaseResponse> detail(@PathVariable("userId") Long userId) {
+
         return ResultResponse.success(BeanUtil.copyProperties(userBaseService.queryUserByUserId(userId), UserBaseResponse.class));
     }
 

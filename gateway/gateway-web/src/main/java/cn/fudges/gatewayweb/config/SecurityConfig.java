@@ -24,8 +24,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
  * @author 王平远
  * @since 2024/9/29
  */
-@Configuration
-@EnableWebFluxSecurity
+//@Configuration
+//@EnableWebFluxSecurity
 public class SecurityConfig {
 
     @Bean

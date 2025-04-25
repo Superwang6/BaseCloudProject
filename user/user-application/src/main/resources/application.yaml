@@ -16,3 +16,10 @@ spring:
         group: BASE_CLOUD_PROJECT
         metadata:
           version: v1
+
+cn:
+  fudges:
+    security:
+      ignore-urls:
+        - "/user/user-base/login"
+

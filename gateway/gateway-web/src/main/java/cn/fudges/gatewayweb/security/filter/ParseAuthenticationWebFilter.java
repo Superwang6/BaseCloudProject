@@ -1,11 +1,16 @@
 package cn.fudges.gatewayweb.security.filter;
 
+import cn.fudges.common.constants.AESKeys;
+import cn.fudges.common.constants.CommonRedisKey;
 import cn.fudges.common.enums.RequestEnum;
-import cn.fudges.gateway.common.enums.GatewayRedisKey;
 import cn.fudges.gatewayweb.mode.UserDetail;
 import cn.fudges.gatewayweb.security.token.UsernamePasswordAuthenticationToken;
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
@@ -30,6 +35,9 @@ public class ParseAuthenticationWebFilter implements WebFilter {
 
     private static final String AUTHORIZATION = "Authorization";
 
+    private static final SymmetricCrypto TOKEN_AES = SecureUtil.aes(Base64.decode(AESKeys.AUTHORIZATION_KEY));
+    private static final SymmetricCrypto USER_ASE = SecureUtil.aes(Base64.decode(AESKeys.USER_ID_KEY));
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         return createContext(exchange)
@@ -42,20 +50,22 @@ public class ParseAuthenticationWebFilter implements WebFilter {
         if (StrUtil.isBlank(authorization)) {
             return Mono.empty();
         }
+        Long userId = null;
+        String info = TOKEN_AES.decryptStr(authorization);
+        if(StrUtil.isNotBlank(info)) {
+            String userIdStr = info.split(":")[0];
+            if(NumberUtil.isLong(userIdStr)) {
+                userId = Long.valueOf(userIdStr);
+            }
+        }
 
-        String tokenKey = GatewayRedisKey.USER_LOGIN_TOKEN_USER_PREFIX + authorization;
-        RBucket<Long> userIdBucket = redissonClient.getBucket(tokenKey);
-
-        return Mono.fromCallable(userIdBucket::get)
-                .filter(ObjectUtil::isNotNull)
-                .flatMap(userId -> {
-                    String userKey = GatewayRedisKey.USER_LOGIN_USER_DETAIL_PREFIX + userId;
-                    RBucket<UserDetail> userDetailBucket = redissonClient.getBucket(userKey);
-                    return Mono.fromCallable(userDetailBucket::get);
-                })
+        String userKey = CommonRedisKey.USER_LOGIN_USER_DETAIL_PREFIX + userId;
+        RBucket<UserDetail> userDetailBucket = redissonClient.getBucket(userKey);
+        return Mono.fromCallable(userDetailBucket::get)
                 .filter(ObjectUtil::isNotNull)
                 .map(detail -> {
-                    exchange.getRequest().mutate().header(RequestEnum.USER_ID, detail.getId().toString());
+                    Long uid = detail.getId();
+                    exchange.getRequest().mutate().header(RequestEnum.USER_ID, USER_ASE.encryptHex(uid + ""));
 
                     UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                             detail, detail.getPassword(), detail.getAuthorities(), detail.getPlatform());

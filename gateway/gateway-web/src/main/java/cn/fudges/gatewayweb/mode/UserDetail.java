@@ -1,7 +1,5 @@
 package cn.fudges.gatewayweb.mode;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -17,8 +15,6 @@ import java.util.stream.Collectors;
  * @author 王平远
  * @since 2024/10/9
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @Data
 public class UserDetail implements UserDetails, Serializable {
 
