@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cn.fudges</groupId>
-	<artifactId>base-authority</artifactId>
+	<artifactId>authority-uploader-spring-boot-starter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>auth-url-scanner</name>
-	<description>auth-url-scanner</description>
+	<name>authority-uploader-spring-boot-starter</name>
+	<description>authority-uploader-spring-boot-starter</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -28,6 +28,9 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<hutool.version>5.8.26</hutool.version>
+		<redisson.version>3.45.0</redisson.version>
+		<fastjson.version>2.0.56</fastjson.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -51,6 +54,22 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-core</artifactId>
+			<version>${hutool.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson-spring-boot-starter</artifactId>
+			<version>${redisson.version}</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

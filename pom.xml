@@ -36,10 +36,11 @@
 
         <code-generator.version>1.0-SNAPSHOT</code-generator.version>
         <common.version>1.0-SNAPSHOT</common.version>
+        <authority-spring-boot-starter.version>0.0.1-SNAPSHOT</authority-spring-boot-starter.version>
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- spring cloud -->
+            <!-- META-INF cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

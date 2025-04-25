@@ -13,3 +13,13 @@ spring:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
       discovery:
         namespace: dd881871-af88-4318-994a-1b5f6aefa362
+  data:
+    redis:
+      port: 6699
+      host: local.fudges.cn
+      password: fudges
+      timeout: 1000
+      database: 0
+      redisson:
+        connect-timeout: 1000
+        connection-pool-size: 80

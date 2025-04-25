@@ -13,7 +13,7 @@
     <modules>
         <module>base-api</module>
         <module>base-common</module>
-        <module>base-authority</module>
+        <module>authority-uploader-spring-boot-starter</module>
     </modules>
 
     <properties>
