@@ -26,7 +26,6 @@
 
         <user.version>1.0-SNAPSHOT</user.version>
         <role.version>1.0-SNAPSHOT</role.version>
-        <security-authorization.version>0.0.1-SNAPSHOT</security-authorization.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -60,11 +59,6 @@
                 <groupId>cn.fudges</groupId>
                 <artifactId>role-api</artifactId>
                 <version>${role.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.fudges</groupId>
-                <artifactId>security-authorization-starter</artifactId>
-                <version>${security-authorization.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

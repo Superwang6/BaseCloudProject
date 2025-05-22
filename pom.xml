@@ -14,7 +14,6 @@
         <module>user</module>
         <module>role</module>
         <module>gateway</module>
-        <module>authority-spring-boot-starter</module>
     </modules>
 
     <properties>
@@ -37,7 +36,7 @@
 
         <code-generator.version>1.0-SNAPSHOT</code-generator.version>
         <common.version>1.0-SNAPSHOT</common.version>
-        <authority-spring-boot-starter.version>0.0.1-SNAPSHOT</authority-spring-boot-starter.version>
+        <authority.version>1.0-SNAPSHOT</authority.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -143,6 +142,13 @@
                 <groupId>cn.fudges</groupId>
                 <artifactId>common</artifactId>
                 <version>${common.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.fudges</groupId>
+                <artifactId>authority-spring-boot-starter</artifactId>
+                <version>${authority.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

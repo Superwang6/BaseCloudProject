@@ -6,6 +6,7 @@ import cn.fudges.user.response.UserBaseResponse;
 import cn.fudges.user.service.UserBaseService;
 import cn.hutool.core.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +27,7 @@ public class UserBaseController {
     }
 
     @PostMapping("/detail/{userId}")
+    @PreAuthorize("hasAuthority('100100')")
     public ResultResponse<UserBaseResponse> detail(@PathVariable("userId") Long userId) {
 
         return ResultResponse.success(BeanUtil.copyProperties(userBaseService.queryUserByUserId(userId), UserBaseResponse.class));

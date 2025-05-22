@@ -48,11 +48,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
@@ -88,6 +83,10 @@
         <dependency>
             <groupId>cn.fudges</groupId>
             <artifactId>gateway-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.fudges</groupId>
+            <artifactId>reactive-security-authentication-starter</artifactId>
         </dependency>
     </dependencies>
 

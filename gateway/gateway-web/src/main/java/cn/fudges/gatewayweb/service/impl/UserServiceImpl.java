@@ -1,9 +1,9 @@
 package cn.fudges.gatewayweb.service.impl;
 
+import cn.fudges.authority.modes.UserDetail;
+import cn.fudges.authority.service.UserService;
 import cn.fudges.common.result.ResultResponse;
 import cn.fudges.common.utils.AssertUtils;
-import cn.fudges.gatewayweb.mode.UserDetail;
-import cn.fudges.gatewayweb.service.UserService;
 import cn.fudges.user.request.UserBaseRequest;
 import cn.fudges.user.response.UserBaseResponse;
 import cn.hutool.core.bean.BeanUtil;
@@ -30,9 +30,16 @@ public class UserServiceImpl implements UserService {
         webClient = webClientBuilder.baseUrl(USER_BASE_URL).build();
     }
 
+    @Override
+    public Mono<UserDetails> findByUsername(String username) {
+        return null;
+    }
 
     @Override
-    public Mono<UserDetails> queryUserByUsernameReactive(UserBaseRequest request) {
+    public Mono<UserDetails> queryUserByUsernameReactive(String username, Integer platform) {
+        UserBaseRequest request = new UserBaseRequest();
+        request.setUserName(username);
+        request.setPlatform(platform);
         return webClient.post()
                 .uri("/user/user-base/login")
                 .bodyValue(JSON.toJSONString(request))
@@ -50,10 +57,5 @@ public class UserServiceImpl implements UserService {
                     }
                     return Mono.empty();
                 });
-    }
-
-    @Override
-    public Mono<UserDetails> findByUsername(String username) {
-        return null;
     }
 }
